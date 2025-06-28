@@ -1,0 +1,116 @@
+---
+title: Maltego
+slug: maltego
+description: Interactive data mining tool for link analysis and visualization.
+categories: ["Reconnaissance", "Threat Intelligence"]
+bgColor: "bg-violet-100"
+textColor: "text-violet-900"
+top: true
+---
+
+export const metadata = {
+  title: "Maltego",
+  category: "Reconnaissance",
+  slug: "maltego",
+};
+
+## 🕵️‍♂️ Maltego Cheatsheet {.cols-2}
+
+### 📌 Footprinting and Reconnaissance
+
+| Task                          | Command                                                               |
+| ----------------------------- | --------------------------------------------------------------------- |
+| Search for domain information | `maltego.entity.search('example.com')`                                |
+| Extract email addresses       | `maltego.transform.run('example.com', 'Affiliate - Email Addresses')` |
+| Discover subdomains           | `maltego.transform.run('example.com', 'Affiliate - DNS Subdomains')`  |
+| Perform WHOIS lookup          | `maltego.transform.run('example.com', 'Affiliate - WHOIS')`           |
+
+---
+
+### 🛡️ Vulnerability Assessment
+
+| Task                             | Command                                                                    |
+| -------------------------------- | -------------------------------------------------------------------------- |
+| Identify open ports and services | `maltego.transform.run('example.com', 'Affiliate - NMAP')`                 |
+| Check for known vulnerabilities  | `maltego.transform.run('example.com', 'Affiliate - Vulnerability - CVEs')` |
+| Perform SSL certificate analysis | `maltego.transform.run('example.com', 'Affiliate - SSL Certificate')`      |
+| Enumerate CMS technologies       | `maltego.transform.run('example.com', 'Affiliate - CMS')`                  |
+
+---
+
+### 🎭 Social Engineering
+
+| Task                                        | Command                                                            |
+| ------------------------------------------- | ------------------------------------------------------------------ |
+| Collect social media profiles               | `maltego.transform.run('John Doe', 'Affiliate - Social Networks')` |
+| Gather email addresses from online sources  | `maltego.transform.run('John Doe', 'Affiliate - Email Addresses')` |
+| Enumerate relationships between individuals | `maltego.transform.run('John Doe', 'Affiliate - Relationships')`   |
+
+---
+
+### 🌐 Network Mapping and Analysis
+
+| Task                                          | Command                                                                 |
+| --------------------------------------------- | ----------------------------------------------------------------------- |
+| Visualize network infrastructure              | `maltego.transform.run('example.com', 'Affiliate - DNS Nameserver')`    |
+| Enumerate IP addresses associated with domain | `maltego.transform.run('example.com', 'Affiliate - DNS Hosts')`         |
+| Discover network devices (SNMP)               | `maltego.transform.run('example.com', 'Affiliate - SNMP - Interfaces')` |
+| SNMP on direct IP                             | `maltego.transform.run('192.168.1.1', 'Affiliate - SNMP - Interfaces')` |
+
+---
+
+### ⚔️ Threat Intelligence
+
+| Task                                       | Command                                                                       |
+| ------------------------------------------ | ----------------------------------------------------------------------------- |
+| Retrieve IP reputation                     | `maltego.transform.run('192.168.1.1', 'Affiliate - IP Reputation')`           |
+| Investigate known malicious domains        | `maltego.transform.run('example.com', 'Affiliate - Known Malicious Domains')` |
+| Search for indicators of compromise (IOCs) | `maltego.transform.run('example.com', 'Affiliate - IOC Search')`              |
+| Info on threat actors                      | `maltego.transform.run('APT32', 'Affiliate - Threat Actor')`                  |
+
+---
+
+### 📧 Email Analysis
+
+| Task                               | Command                                                                        |
+| ---------------------------------- | ------------------------------------------------------------------------------ |
+| Extract metadata from headers      | `maltego.transform.run('john.doe@example.com', 'Affiliate - Email Headers')`   |
+| Perform email reconnaissance       | `maltego.transform.run('example.com', 'Affiliate - Email Addresses')`          |
+| Investigate communication patterns | `maltego.transform.run('john.doe@example.com', 'Affiliate - Email - To/From')` |
+
+---
+
+### 🌍 Web Application Security
+
+| Task                                  | Command                                                                 |
+| ------------------------------------- | ----------------------------------------------------------------------- |
+| Enumerate website technologies        | `maltego.transform.run('example.com', 'Affiliate - Web Technologies')`  |
+| Discover related websites and domains | `maltego.transform.run('example.com', 'Affiliate - Related Domains')`   |
+| Search for public code repositories   | `maltego.transform.run('example.com', 'Affiliate - Code Repositories')` |
+
+---
+
+### 🏢 Physical Security Assessments
+
+| Task                               | Command                                                                 |
+| ---------------------------------- | ----------------------------------------------------------------------- |
+| Identify IP geolocation            | `maltego.transform.run('192.168.1.1', 'Affiliate - Geolocation')`       |
+| Nearby facilities or organizations | `maltego.transform.run('123 Main St', 'Affiliate - Nearby Facilities')` |
+
+---
+
+### 🔐 Data Leakage Investigation
+
+| Task                                | Command                                                                            |
+| ----------------------------------- | ---------------------------------------------------------------------------------- |
+| Search for leaked credentials       | `maltego.transform.run('example@gmail.com', 'Affiliate - Breach - Email Address')` |
+| Investigate domain-related breaches | `maltego.transform.run('example.com', 'Affiliate - Breach - Domain')`              |
+
+---
+
+### 📱 Mobile Application Security
+
+| Task                                  | Command                                                                         |
+| ------------------------------------- | ------------------------------------------------------------------------------- |
+| Analyze mobile app metadata           | `maltego.transform.run('com.example.app', 'Affiliate - Mobile App Metadata')`   |
+| Extract data from mobile app binaries | `maltego.transform.run('com.example.app', 'Affiliate - Mobile App Extraction')` |

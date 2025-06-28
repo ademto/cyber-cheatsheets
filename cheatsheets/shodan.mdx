@@ -1,0 +1,172 @@
+---
+title: Shodan
+slug: shodan
+description: Search engine for internet-connected devices and services.
+categories: ["Reconnaissance", "Threat Intelligence"]
+bgColor: "bg-purple-100"
+textColor: "text-purple-900"
+top: true
+---
+
+export const metadata = {
+  title: "Shodan",
+  category: "Reconnaissance",
+  slug: "shodan",
+};
+
+## 🔍 Shodan Search Queries Cheatsheet
+
+### 🌍 General Search Queries {.col-span-2}
+
+| Query                                 | Description                              |
+| ------------------------------------- | ---------------------------------------- |
+| `city:"[city name]"`                  | Devices in a specific city.              |
+| `country:"[country code]"`            | Devices in a specific country.           |
+| `geo:"[lat],[lon]"`                   | Geographic location-specific devices.    |
+| `hostname:"[hostname]"`               | Devices with a specific hostname.        |
+| `net:"[IP range]"`                    | Devices within a certain IP range.       |
+| `os:"[OS]"`                           | Devices running a specific OS.           |
+| `port:"[port number]"`                | Devices open on a specific port.         |
+| `org:"[organization]"`                | Devices associated with an organization. |
+| `isp:"[ISP]"`                         | Devices from a specific ISP.             |
+| `product:"[product name]"`            | Devices running a specific product.      |
+| `version:"[version]"`                 | Devices with a specific version.         |
+| `has_screenshot:true`                 | Devices with screenshots.                |
+| `ssl.cert.subject.cn:"[common name]"` | SSL certs with a specific CN.            |
+| `http.title:"[title]"`                | Web pages with a certain title.          |
+| `http.html:"[HTML content]"`          | Web pages containing specific HTML.      |
+| `http.status_code:[code]`             | Devices returning specific HTTP codes.   |
+| `ssl:"[SSL keyword]"`                 | Devices with certain SSL configurations. |
+| `before:"[date]" / after:"[date]"`    | Devices online before/after a date.      |
+| `bitcoin.ip:"[IP]"`                   | Bitcoin nodes by IP.                     |
+| `ssh.fingerprint:"[fingerprint]"`     | SSH servers with a fingerprint.          |
+
+---
+
+### ⚙️ Applications and Services
+
+| Query                                     | Description                         |
+| ----------------------------------------- | ----------------------------------- |
+| `product:"[product]"`                     | Devices running a specific product. |
+| `version:"[version]"`                     | Devices with a certain version.     |
+| `webcam`                                  | Search for internet webcams.        |
+| `"default password"`                      | Devices using default credentials.  |
+| `"server: Apache"`                        | Apache web servers.                 |
+| `ftp`                                     | FTP services.                       |
+| `"X-Powered-By: PHP/[version]"`           | PHP versioned servers.              |
+| `iis:[version]`                           | IIS servers.                        |
+| `"Server: nginx"`                         | Nginx servers.                      |
+| `"MongoDB Server Information" port:27017` | MongoDB servers.                    |
+| `"CCTV"`                                  | Internet-connected CCTV.            |
+| `"PBX VoIP"`                              | VoIP PBX systems.                   |
+| `"Elasticsearch"`                         | Elasticsearch nodes.                |
+| `"OpenSSL"`                               | OpenSSL-enabled systems.            |
+| `"SCADA"`                                 | SCADA control systems.              |
+| `"VoIP Phone"`                            | Internet VoIP phones.               |
+
+---
+
+### 🛰️ Device and Service Identification
+
+| Query                           | Description                        |
+| ------------------------------- | ---------------------------------- |
+| `asn:"[ASN]"`                   | Devices associated with ASN.       |
+| `http.favicon.hash:[hash]`      | Servers with a specific favicon.   |
+| `ntp.ip:"[IP]"`                 | NTP servers by IP.                 |
+| `ssl.cert.issuer.cn:"[issuer]"` | SSL certs by issuer CN.            |
+| `http.component:"[component]"`  | Web apps with specific components. |
+| `http.robotstxt:"[content]"`    | Robots.txt content match.          |
+| `http.waf:"[WAF name]"`         | Web Application Firewalls.         |
+| `http.xssed:"[keyword]"`        | XSSed database entries.            |
+| `http.cookie:"[cookie name]"`   | Servers setting specific cookies.  |
+| `http.useragent:"[UA]"`         | Devices with specific user agents. |
+
+---
+
+### 🌐 Network & Infra Analysis
+
+| Query                           | Description                    |
+| ------------------------------- | ------------------------------ |
+| `not ssl`                       | Devices not using SSL.         |
+| `metadata:"[keyword]"`          | Metadata search.               |
+| `http.html_hash:[hash]`         | Pages with specific HTML hash. |
+| `netblock:"[owner]"`            | Netblock owner-based search.   |
+| `http.server_header:"[header]"` | Specific server headers.       |
+| `udp`                           | Devices with open UDP ports.   |
+| `telnet`                        | Telnet-accessible devices.     |
+
+---
+
+### 📡 IoT and Connected Devices
+
+| Query                          | Description                   |
+| ------------------------------ | ----------------------------- |
+| `"smart tv"`                   | Internet-connected smart TVs. |
+| `"printer" "default password"` | Printers with default creds.  |
+| `"Raspberry Pi" port:22`       | SSH on Raspberry Pi devices.  |
+| `"thermostat" "wifi"`          | Wi-Fi-enabled thermostats.    |
+| `"smart home"`                 | General smart home devices.   |
+| `"IP camera" "default login"`  | IP cams with default login.   |
+| `"smart meter"`                | Smart meters online.          |
+| `"home automation"`            | Automation systems.           |
+| `"wearable"`                   | Wearable devices online.      |
+
+---
+
+### 🛡️ Security and Vulnerability Research {.row-span-2 .col-span-2}
+
+| Query                                          | Description                     |
+| ---------------------------------------------- | ------------------------------- |
+| `ssl.cert.serial:"[serial]"`                   | Certs with specific serials.    |
+| `"Server: Microsoft-HTTPAPI/2.0"`              | Specific MS HTTP servers.       |
+| `"Cisco IOS" "http auth"`                      | Cisco devices with HTTP auth.   |
+| `"default login" "router"`                     | Routers with default login.     |
+| `"Hadoop NameNode"`                            | Exposed Hadoop nodes.           |
+| `"Apache Struts" vuln`                         | Apache Struts vulnerabilities.  |
+| `"Tomcat" admin`                               | Tomcat admin interfaces.        |
+| `"Docker" port:2375`                           | Open Docker instances.          |
+| `vuln:"[CVE-ID]"`                              | Vulnerable to specific CVEs.    |
+| `"200 OK" ssl`                                 | SSL servers returning 200 OK.   |
+| `"Server: Apache" -mod_ssl -OpenSSL`           | Apache without SSL.             |
+| `ssl.cert.expired:true`                        | Expired SSL certs.              |
+| `"heartbleed" vuln`                            | Heartbleed vulnerability.       |
+| `http.component:"Drupal" vuln:"CVE-2018-7600"` | Vulnerable Drupal sites.        |
+| `"Authentication: disabled"`                   | Devices with no auth.           |
+| `http.title:"Index of /"`                      | Open directories.               |
+| `ssl:"TLSv1"`                                  | Devices using outdated TLS.     |
+| `org:"[org]" vuln:"[CVE]"`                     | Org vulnerable to CVE.          |
+| `"EternalBlue" vuln`                           | EternalBlue-vulnerable systems. |
+| `"Joomla" vuln`                                | Joomla with known vulns.        |
+| `"WordPress" vuln`                             | WordPress with vulns.           |
+| `"SQL Injection" vuln`                         | SQLi-vulnerable targets.        |
+| `"DDoS" vuln`                                  | DDoS-vulnerable devices.        |
+
+---
+
+### 📍 Geographic and Demographic Analysis
+
+| Query                                     | Description                  |
+| ----------------------------------------- | ---------------------------- |
+| `city:"[city]" os:"[OS]"`                 | OS-specific devices by city. |
+| `country:"[country]" product:"[product]"` | Product-based by country.    |
+| `region:"[region]"`                       | Devices in a region.         |
+| `postal:"[postal]"`                       | Devices by postal code.      |
+| `latitude:"[lat]" longitude:"[lon]"`      | Devices at coordinates.      |
+| `area:"[code]"`                           | Devices by area code.        |
+
+---
+
+### 🔗 Combined Query Examples {.col-span-2}
+
+| Query                                                           | Description                              |
+| --------------------------------------------------------------- | ---------------------------------------- |
+| `os:"Linux" port:"22" "SSH" country:"JP"`                       | Linux SSH devices in Japan.              |
+| `product:"Apache" version:"2.4.7" -"200 OK"`                    | Apache not returning 200 OK.             |
+| `city:"New York" os:"Windows" port:"3389"`                      | RDP on Windows in NY.                    |
+| `net:"192.168.1.0/24" webcam`                                   | Webcams in subnet.                       |
+| `org:"Google" ssl cert:"expired"`                               | Expired certs at Google.                 |
+| `country:"DE" product:"MySQL" version:"5.5" "default password"` | MySQL w/ default passwords in Germany.   |
+| `"HTTP/1.1 401 Unauthorized" city:"London" port:"80"`           | Unauthorized HTTP in London.             |
+| `"Server: Apache" -"Apache-Coyote" country:"BR"`                | Apache servers in Brazil.                |
+| `hostname:"*.edu" vuln:"CVE-2019-11510"`                        | .edu sites vulnerable to CVE-2019-11510. |
+| `"IIS/8.0" -"X-Powered-By" net:"205.251.192.0/18"`              | IIS 8.0 in specific range.               |

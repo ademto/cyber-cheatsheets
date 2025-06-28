@@ -1,0 +1,86 @@
+---
+title: Pacu
+slug: pacu
+description: AWS exploitation framework for penetration testing.
+categories: ["Cloud Security", "Exploitation"]
+bgColor: "bg-sky-300"
+textColor: "text-sky-900"
+top: false
+---
+
+export const metadata = {
+  title: "Pacu",
+  category: "Cloud Security",
+  slug: "pacu",
+};
+
+## Pacu Installation & Usage Cheatsheet {.cols-2}
+
+### 🧰 Installation {.col-start-1 .row-start-1}
+
+    pipx install git+https://github.com/RhinoSecurityLabs/pacu.git
+
+> This installs Pacu globally and allows running `pacu` directly from the terminal.
+
+### 🚀 Initial Setup {.col-start-1 .row-start-2}
+
+    # Launch Pacu
+    pacu
+
+    # On first launch, create a new session (you'll be prompted)
+    # Enter a session name, e.g., my_session
+
+    # Set AWS keys manually (follow prompts)
+    set_keys
+
+    # Or import keys from AWS CLI profile
+    set_keys <aws_profile_name>
+    # To import all profiles
+    set_keys --all
+
+### 📋 Basic Commands {.row-start-1 .row-span-2}
+
+| Command                                           | Description                           |
+| ------------------------------------------------- | ------------------------------------- | --------------------------- |
+| `help`                                            | Display help                          |
+| `ls` or `list`                                    | List all modules                      |
+| `search <category_or_name>`                       | Search modules by name or category    |
+| `help <module_name>`                              | Show detailed help for a module       |
+| `run <module_name>`                               | Run a module                          |
+| `run <module_name> --regions us-east-1,us-west-2` | Run module targeting specific regions |
+| `whoami`                                          | Check current AWS user permissions    |
+| `run iam__enum_permissions`                       | Update permissions info after changes |
+| `data <service_name                               | all>`                                 | Show collected session data |
+| `set_regions <region1 region2 ...                 | all>`                                 | Set regions for the session |
+| `swap_keys`                                       | Switch to a different user's AWS keys |
+
+### 🔑 Key Modules & Usage
+
+| Purpose                  | Commands / Modules              |
+| ------------------------ | ------------------------------- |
+| **Enumeration**          | `run iam__enum_permissions`     |
+|                          | `run iam__privesc_scan`         |
+|                          | `run iam__detect_honeytokens`   |
+|                          | `run s3__enum`                  |
+| **Privilege Escalation** | `run iam__privesc_scan`         |
+|                          | `run iam__backdoor_assume_role` |
+| **Persistence**          | `run backdoor_users_keys`       |
+|                          | `run backdoor_users_passwords`  |
+|                          | `run backdoor_ec2_sec_groups`   |
+| **Data Exfiltration**    | `run s3__download_bucket`       |
+|                          | `run s3__bucket_finder`         |
+| **Log Manipulation**     | `run disrupt_monitoring`        |
+| **EC2 Exploitation**     | `run sysman_ec2_rce`            |
+| **Lambda Attacks**       | `run lambda__enum`              |
+
+### ⚙️ Advanced Usage
+
+| Command                                                         | Description                        |
+| --------------------------------------------------------------- | ---------------------------------- |
+| `run <module_name> --module-args='--arg1 value1 --arg2 value2'` | Run module with custom arguments   |
+| `pacu --module-name <module_name> --exec`                       | Execute module non-interactively   |
+| `pacu --list-modules`                                           | List all modules non-interactively |
+| `pacu -q`                                                       | Quiet mode (no banner)             |
+
+✅ **Tip:** Always replace placeholders like `<module_name>`, `<aws_profile_name>`, or region names with your actual values.  
+Make sure you have the necessary AWS permissions when running Pacu modules.

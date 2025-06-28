@@ -1,0 +1,72 @@
+---
+title: Masscan
+slug: masscan
+description: Ultra-fast port scanner for large-scale network enumeration.
+categories: ["Enumeration", "Network Security"]
+bgColor: "bg-orange-100"
+textColor: "text-orange-900"
+top: true
+---
+
+export const metadata = {
+  title: "Masscan",
+  category: "Enumeration",
+  slug: "masscan",
+};
+
+## 🚀 Masscan Cheatsheet {.cols-1}
+
+Masscan is an ultra-fast port scanner capable of scanning the entire Internet in seconds.
+
+## {.cols-2}
+
+### ⚙️ Basic Usage
+
+| Command                                       | Description                                       |
+| --------------------------------------------- | ------------------------------------------------- |
+| `masscan -p80 192.168.1.0/24`                 | Scan port 80 on subnet `192.168.1.0/24`.          |
+| `masscan -p0-65535 10.0.0.0/8`                | Scan all 65535 ports on a large internal network. |
+| `masscan -p22 192.168.0.1 --rate=1000`        | Limit scan rate to 1000 packets per second.       |
+| `masscan -iL targets.txt -p80`                | Scan targets listed in a file.                    |
+| `masscan -p80 192.168.1.0/24 -oX results.xml` | Output results in XML format.                     |
+| `masscan -p443 192.168.1.1 --banners`         | Grab banners from open ports.                     |
+| `masscan -p80 0.0.0.0/0 --rate=10000`         | Scan the entire internet on port 80 at 10k pps.   |
+| `masscan -e eth0 -p80 192.168.1.0/24`         | Specify a network interface.                      |
+
+### 🔧 Common Options
+
+| Option                 | Description                                               |
+| ---------------------- | --------------------------------------------------------- |
+| `-p <port>`            | Target port(s) to scan (e.g., `80`, `22,443`, `0-65535`). |
+| `-iL <file>`           | Input file containing target IPs.                         |
+| `--rate=<pps>`         | Set packets per second rate (default is very high).       |
+| `-oX <file>`           | Output results to an XML file.                            |
+| `-oG <file>`           | Output results in grepable format.                        |
+| `-oJ <file>`           | Output results in JSON format.                            |
+| `--banners`            | Attempt to grab service banners.                          |
+| `-e <interface>`       | Specify network interface to use.                         |
+| `--router-mac <MAC>`   | Set the router MAC address if needed.                     |
+| `--source-port <port>` | Set a custom source port.                                 |
+| `--randomize-hosts`    | Randomize host scanning order.                            |
+
+### 🧪 Example Scans
+
+```bash
+# Scan a single IP on port 80
+masscan 192.168.0.1 -p80
+
+# Scan a range of IPs on multiple ports
+masscan 10.10.0.0/16 -p22,80,443
+
+# Full TCP port scan with custom rate
+masscan 192.168.1.0/24 -p0-65535 --rate=5000
+
+# Scan targets from file and save in JSON
+masscan -iL targets.txt -p80 -oJ output.json
+
+# Banner grabbing example
+masscan -p21,22,23,80,443 192.168.1.0/24 --banners
+
+# Specify interface and output to grepable format
+masscan -e eth0 -p80 10.0.0.0/24 -oG result.txt
+```

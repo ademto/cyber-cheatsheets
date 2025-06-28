@@ -1,0 +1,118 @@
+---
+title: htop
+slug: htop
+description: Interactive process viewer for Unix systems.
+categories: ["SOC", "System Monitoring"]
+bgColor: "bg-green-200"
+textColor: "text-green-900"
+top: false
+---
+
+export const metadata = {
+  title: "htop",
+  category: "SOC",
+  slug: "htop",
+};
+
+## htop Cheatsheet {.cols-2}
+
+### Basic Syntax {.col-start-1 .row-start-1}
+
+| Command | Description                                                                                       |
+| ------- | ------------------------------------------------------------------------------------------------- |
+| `htop`  | Launches the `htop` interactive interface to show running processes, CPU, memory, and swap usage. |
+
+### Common Options with `htop` {.col-start-1 .row-start-2}
+
+| Option              | Description                                                                   |
+| ------------------- | ----------------------------------------------------------------------------- |
+| `-d <delay>`        | Sets the delay between screen updates (e.g., `-d 10` means 10 seconds delay). |
+| `-u <user>`         | Displays only processes owned by the specified user.                          |
+| `-p <pid>`          | Shows only processes with specific PIDs.                                      |
+| `-s <column>`       | Sorts the process list by the specified column (e.g., `-s CPU`).              |
+| `-t`                | Displays the process hierarchy in a tree view.                                |
+| `--no-color`        | Runs `htop` in monochrome mode, disabling color.                              |
+| `-v` or `--version` | Outputs the version of `htop` and exits.                                      |
+
+### Examples {.row-start-1 .row-span-2}
+
+| Command              | Description                                                                 |
+| -------------------- | --------------------------------------------------------------------------- |
+| `htop -d <delay>`    | Example: `htop -d 10` — Adds a delay of 10 seconds between screen updates.  |
+| `htop -u <username>` | Example: `htop -u kunwarvikas` — Displays processes owned by `kunwarvikas`. |
+| `htop -p <pid>`      | Example: `htop -p 369` — Displays only the process with PID 369.            |
+| `htop -s <column>`   | Example: `htop -s PRIORITY` — Sorts processes by priority.                  |
+| `htop -t`            | Displays processes in a tree view to show parent-child relationships.       |
+| `htop --no-color`    | Runs `htop` without color.                                                  |
+| `htop -v`            | Outputs the version of `htop` and exits.                                    |
+
+---
+
+### Interactive Commands in `htop`
+
+| Command                 | Description                                                               |
+| ----------------------- | ------------------------------------------------------------------------- |
+| **Arrow Keys**          | Navigate the process list (up, down, left, right).                        |
+| **Page Up / Page Down** | Scroll the process list one page up or down.                              |
+| **Home / End**          | Jump to the top or bottom of the process list.                            |
+| **Space**               | Tag or untag a process (select it for further actions).                   |
+| **U**                   | Untag all processes.                                                      |
+| **s**                   | Trace system calls of the selected process.                               |
+| **F1**                  | Help: Displays help and usage information.                                |
+| **F2**                  | Setup: Opens the setup menu for customizing the interface and appearance. |
+| **F3**                  | Search: Search for a process by name or PID.                              |
+| **F4**                  | Filter: Filter processes by a part of the command name.                   |
+| **F5**                  | Tree View: Show processes in a tree structure.                            |
+| **F6**                  | Sort: Choose a column to sort the processes (e.g., by CPU, memory).       |
+| **F7**                  | Increase the priority (nice value) of the selected process.               |
+| **F8**                  | Decrease the priority (nice value) of the selected process.               |
+| **F9**                  | Kill: Send a signal to the selected process (e.g., TERM, KILL, etc.).     |
+| **F10**                 | Quit: Exit `htop`.                                                        |
+
+---
+
+### Additional Tips
+
+| Concept          | Description                                                                  |
+| ---------------- | ---------------------------------------------------------------------------- |
+| **PID**          | Process ID: Unique identifier for each running process.                      |
+| **CPU Usage**    | Percentage of CPU consumed by each process.                                  |
+| **Memory Usage** | The amount of RAM used by each process.                                      |
+| **Priority**     | The priority (nice value) of the process. Lower values mean higher priority. |
+| **Tree View**    | Shows processes in a hierarchical tree structure.                            |
+
+---
+
+### Quick Command Summary
+
+| Command/Action        | Description                                                                           |
+| --------------------- | ------------------------------------------------------------------------------------- |
+| **F1**                | Help: Displays help and usage information.                                            |
+| **F2**                | Setup: Opens the setup menu for customizing the interface and appearance.             |
+| **F3**                | Search: Allows searching for a process by name or PID.                                |
+| **F4**                | Filter: Filter processes based on specific criteria.                                  |
+| **F5**                | Tree View: Switches to a tree view of processes, showing the hierarchy.               |
+| **F6**                | Sort: Changes the sorting order of processes.                                         |
+| **F7**                | Increase priority: Increases the "nice" value (lowers priority).                      |
+| **F8**                | Decrease priority: Decreases the "nice" value (raises priority).                      |
+| **F9**                | Kill: Sends a signal to a process (e.g., TERM, KILL, etc.).                           |
+| **F10**               | Quit: Exits `htop`.                                                                   |
+| **Arrow Keys**        | Navigation: Move up/down, left/right to scroll through processes or menus.            |
+| **Page Up/Page Down** | Navigation: Scroll up or down one page at a time.                                     |
+| **Enter**             | Select a process: Selects a process to view detailed information.                     |
+| **q**                 | Quit: Exit `htop`.                                                                    |
+| **Space**             | Mark process: Toggles the selection of a process for killing or other actions.        |
+| **u**                 | Show User: Filter processes by a specific user.                                       |
+| **P**                 | Sort by CPU usage: Orders processes by CPU consumption.                               |
+| **M**                 | Sort by Memory usage: Orders processes by memory consumption.                         |
+| **T**                 | Sort by Time: Orders processes by their cumulative runtime.                           |
+| **C**                 | Toggle Columns: Show/hide specific columns (e.g., PID, User, CPU, Memory).            |
+| **F**                 | Show Full Command: Toggles between showing the full command or just the command name. |
+| **1**                 | Toggle CPU Core Usage: Displays CPU usage per core.                                   |
+| **+/-**               | Increase/Decrease CPU frequency (if available).                                       |
+| **s**                 | Set delay between updates (e.g., `s` to set in seconds).                              |
+| **i**                 | Toggle Idle Processes: Show/hide idle processes.                                      |
+| **H**                 | Show threads: Display individual threads instead of just processes.                   |
+| **L**                 | Display load average: Show system load averages for 1, 5, and 15 minutes.             |
+| **N**                 | Sort by PID: Sort processes based on their Process ID.                                |
+| **F12**               | Force Quit: Ends the program without any confirmation.                                |

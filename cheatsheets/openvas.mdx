@@ -1,0 +1,120 @@
+---
+title: OpenVAS
+slug: openvas
+description: Open-source vulnerability assessment and management system.
+categories: ["Vulnerability Assessment", "Security Scanning"]
+bgColor: "bg-green-100"
+textColor: "text-green-900"
+top: true
+---
+
+export const metadata = {
+  title: "OpenVAS",
+  category: "Enumeration",
+  slug: "openvas",
+};
+
+# 🛡️ OpenVAS Command Guide
+
+A categorized reference of essential OpenVAS commands for managing vulnerability assessments.
+
+---
+
+## ⚙️ OpenVAS Service Management
+
+| **Command** | **Description** | **Example Output** |
+|-------------|------------------|---------------------|
+| `openvas-start` | Starts all OpenVAS services. | `Starting OpenVAS services... OpenVAS services started successfully.` |
+| `openvas-stop` | Stops all OpenVAS services. | `Stopping OpenVAS services... OpenVAS services stopped successfully.` |
+| `openvasmd --status` | Checks the current status of OpenVAS services. | `OpenVAS services are running.` |
+| `openvas-help` | Displays available commands and usage info. | Lists all options and help messages. |
+
+---
+
+## 🔄 Database Management
+
+| **Command** | **Description** | **Example Output** |
+|-------------|------------------|---------------------|
+| `openvas-nvt-sync` | Updates the Network Vulnerability Tests (NVT) database. | `Synchronizing NVTs... NVT synchronization completed.` |
+
+---
+
+## 🎯 Target Management
+
+| **Command** | **Description** | **Example Output** |
+|-------------|------------------|---------------------|
+| `openvasmd --create-target --name "<target_name>" --hosts "<target_ip>"` | Creates a scan target. | `Target created with ID: a3b4c5d6` |
+
+---
+
+## 🧪 Scan Configuration
+
+| **Command** | **Description** | **Example Output** |
+|-------------|------------------|---------------------|
+| `openvasmd --create-scan-config --name "<scan_name>"` | Creates a new scan configuration. | `Scan configuration 'Basic Scan' created with ID: x1y2z3` |
+| `openvasmd --get-scan-configs` | Lists available scan configurations. | `1. Basic Scan  2. Full Scan` |
+| `openvasmd --delete-scan-config --config-id=<config_id>` | Deletes a scan configuration. | `Scan configuration with ID: x1y2z3 deleted successfully.` |
+| `openvasmd --import-scan-config <file>` | Imports scan config from a file. | `Scan configuration imported successfully.` |
+| `openvasmd --export-scan-config --config-id=<config_id> --format=xml` | Exports scan config to a file. | `Scan configuration exported as config.xml` |
+
+---
+
+## 🚀 Scan Execution
+
+| **Command** | **Description** | **Example Output** |
+|-------------|------------------|---------------------|
+| `omp --xml="<scan_configuration>" --target=<target_id>` | Launches a scan on the specified target. | `Scan started with ID: e7f8g9h0` |
+| `omp --xml="<pause_scan>" --scan-id=<scan_id>` | Pauses an ongoing scan. | `Scan with ID: e7f8g9h0 paused successfully.` |
+| `omp --xml="<resume_scan>" --scan-id=<scan_id>` | Resumes a paused scan. | `Scan with ID: e7f8g9h0 resumed successfully.` |
+
+---
+
+## 📊 Reports and Results
+
+| **Command** | **Description** | **Example Output** |
+|-------------|------------------|---------------------|
+| `omp --xml="<get_reports>"` | Retrieves completed scan reports. | `Vulnerabilities found: 5 (Critical: 1, High: 2, Medium: 2)` |
+| `omp --get-report --format=pdf --report-id=<report_id>` | Exports scan report as PDF. | `Report exported as report.pdf` |
+| `openvasmd --delete-report --report-id=<report_id>` | Deletes a scan report. | `Report with ID: e7f8g9h0 deleted successfully.` |
+
+---
+
+## 👥 User & Role Management
+
+| **Command** | **Description** | **Example Output** |
+|-------------|------------------|---------------------|
+| `openvasmd --create-user=<username>` | Creates a new user. | `User 'analyst' created successfully.` |
+| `openvasmd --get-users` | Lists all OpenVAS users. | `1. admin  2. analyst` |
+| `openvasmd --modify-user=<username> --new-role=admin` | Updates user role. | `User 'analyst' role updated to 'admin'.` |
+| `openvasmd --delete-user=<username>` | Deletes a user. | `User 'analyst' deleted successfully.` |
+
+---
+
+## ⏰ Scan Scheduling
+
+| **Command** | **Description** | **Example Output** |
+|-------------|------------------|---------------------|
+| `openvasmd --create-schedule --name "<name>" --hour=2 --day-of-week=Sunday` | Creates a weekly scan schedule. | `Schedule 'Weekly Scan' created successfully.` |
+| `openvasmd --get-schedules` | Lists all scheduled scans. | `1. Weekly Scan` |
+| `openvasmd --delete-schedule --schedule-id=<schedule_id>` | Deletes a scheduled scan. | `Schedule with ID: w1x2y3z4 deleted successfully.` |
+
+---
+
+## 📁 Examples Summary
+
+| **Action** | **Example Command** |
+|------------|---------------------|
+| Create target | `openvasmd --create-target --name "Server" --hosts "192.168.1.1"` |
+| Create scan config | `openvasmd --create-scan-config --name "Basic Scan"` |
+| Start scan | `omp --xml="<scan_configuration>" --target=a3b4c5d6` |
+| Export report | `omp --get-report --format=pdf --report-id=e7f8g9h0` |
+| Create user | `openvasmd --create-user=analyst` |
+| Create schedule | `openvasmd --create-schedule --name "Weekly Scan" --hour=2 --day-of-week=Sunday` |
+
+---
+
+## ✅ Tips
+
+- Always update your NVTs before scanning to ensure coverage of latest vulnerabilities.
+- Use meaningful names for targets and configurations for easier management.
+- Regularly export reports for offline analysis and compliance documentation.

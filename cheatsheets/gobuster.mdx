@@ -1,0 +1,129 @@
+---
+title: Gobuster
+slug: gobuster
+description: Fast directory, DNS, and VHOST brute-forcing tool.
+categories: ["Enumeration", "Web Application Security"]
+bgColor: "bg-fuchsia-100"
+textColor: "text-fuchsia-900"
+top: true
+---
+
+export const metadata = {
+  title: "Gobuster",
+  category: "Enumeration",
+  slug: "gobuster",
+};
+
+## Gobuster Cheat Sheet {.cols-2}
+
+### Basic Commands
+
+| Command                                  | Description                                                     |
+| ---------------------------------------- | --------------------------------------------------------------- |
+| `gobuster dir -u <URL> -w <wordlist>`    | Directory brute-force against a web server                      |
+| `gobuster dns -d <domain> -w <wordlist>` | DNS subdomain brute-force against a domain                      |
+| `gobuster vhost -u <URL> -w <wordlist>`  | Virtual host brute-force (useful for identifying hidden vhosts) |
+| `gobuster s3 -w <wordlist>`              | Brute-force S3 bucket names using the wordlist                  |
+| `gobuster fuzz -u <URL> -w <wordlist>`   | Fuzz the URL with the wordlist                                  |
+| `gobuster -h`                            | Show help menu and available commands                           |
+
+---
+
+### Directory and File Enumeration
+
+| Command                                          | Description                                             |
+| ------------------------------------------------ | ------------------------------------------------------- |
+| `gobuster dir -u <URL> -w <wordlist> -t <num>`   | Set the number of threads (default is 10)               |
+| `gobuster dir -u <URL> -w <wordlist> -e`         | Show full URLs in the output                            |
+| `gobuster dir -u <URL> -w <wordlist> -x <ext>`   | Search for specific file extensions (e.g., .php, .html) |
+| `gobuster dir -u <URL> -w <wordlist> -r`         | Follow redirects                                        |
+| `gobuster dir -u <URL> -w <wordlist> -k`         | Skip SSL certificate verification                       |
+| `gobuster dir -u <URL> -w <wordlist> --wildcard` | Identify and handle wildcard responses                  |
+| `gobuster dir -u <URL> -w <wordlist> -l`         | Add a trailing slash to each word in the wordlist       |
+
+---
+
+### DNS Subdomain Enumeration
+
+| Command                                                | Description                                            |
+| ------------------------------------------------------ | ------------------------------------------------------ |
+| `gobuster dns -d <domain> -w <wordlist> -i`            | Show only valid subdomains (ignore NXDOMAIN responses) |
+| `gobuster dns -d <domain> -w <wordlist> -r <resolver>` | Use a custom DNS resolver (e.g., 8.8.8.8)              |
+| `gobuster dns -d <domain> -w <wordlist> -t <num>`      | Set the number of threads (default is 10)              |
+
+---
+
+### Virtual Host (VHOST) Enumeration
+
+| Command                                          | Description                        |
+| ------------------------------------------------ | ---------------------------------- |
+| `gobuster vhost -u <URL> -w <wordlist> -t <num>` | Brute-force VHOSTs with a wordlist |
+| `gobuster vhost -u <URL> -w <wordlist> -k`       | Skip SSL certificate verification  |
+
+---
+
+### Fuzzing
+
+| Command                                                  | Description                                      |
+| -------------------------------------------------------- | ------------------------------------------------ |
+| `gobuster fuzz -u <URL> -w <wordlist> -t <num>`          | Fuzz a URL parameter or path with a wordlist     |
+| `gobuster fuzz -u http://example.com/FUZZ -w <wordlist>` | Replace "FUZZ" with each entry from the wordlist |
+
+---
+
+### Common Options
+
+| Option             | Description                                            |
+| ------------------ | ------------------------------------------------------ |
+| `-u <URL>`         | Target URL to scan                                     |
+| `-w <wordlist>`    | Path to the wordlist                                   |
+| `-t <num>`         | Number of concurrent threads (default is 10)           |
+| `-o <output file>` | Output the scan results to a file                      |
+| `-s <status code>` | Filter results by status code (e.g., `-s 200,301,302`) |
+| `-n`               | No recursion; do not scan subdirectories               |
+| `-k`               | Skip SSL/TLS certificate validation                    |
+| `-b <status code>` | Blacklist specific HTTP status codes (e.g., `-b 404`)  |
+| `-q`               | Suppress all output except for found results           |
+
+---
+
+### Advanced Usage
+
+| Command                                                      | Description                                    |
+| ------------------------------------------------------------ | ---------------------------------------------- |
+| `gobuster dir -u <URL> -w <wordlist> -a <User-Agent>`        | Specify a custom user-agent                    |
+| `gobuster dir -u <URL> -w <wordlist> -H 'Header: value'`     | Add custom HTTP headers                        |
+| `gobuster dir -u <URL> -w <wordlist> --delay <ms>`           | Add a delay between requests (in milliseconds) |
+| `gobuster dir -u <URL> -w <wordlist> --exclude-length <len>` | Exclude results with a specific content length |
+
+---
+
+### Wordlists
+
+**Common Wordlists:**
+
+- `/usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt`
+- `/usr/share/seclists/Discovery/Web-Content/common.txt`
+- `/usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt`
+
+---
+
+### Example Scans {.col-span-2}
+
+**Basic Directory Bruteforce:**
+
+```bash
+gobuster dir -u http://example.com -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+```
+
+**DNS Subdomain Bruteforce**
+
+```bash
+gobuster dns -d example.com -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt
+```
+
+**Virtual Host Brute-forcing**
+
+```bash
+gobuster vhost -u http://example.com -w /usr/share/wordlists/virtual-hosts.txt
+```

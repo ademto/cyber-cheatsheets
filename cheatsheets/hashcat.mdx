@@ -1,0 +1,121 @@
+---
+title: Hashcat
+slug: hashcat
+description: Advanced password recovery and hash cracking tool.
+categories: ["Exploitation", "Password Cracking"]
+bgColor: "bg-amber-100"
+textColor: "text-amber-900"
+top: true
+---
+
+export const metadata = {
+  title: "Hashcat",
+  category: "Exploitation",
+  slug: "hashcat",
+};
+
+## 🔑 Hashcat Cheat Sheet
+
+### 🧩 Basic Syntax {.col-span-3}
+
+```bash
+hashcat -m <hash-type> -a <attack-mode> <hashfile> <wordlist>
+```
+
+### 🔢 Common Hash Types (`-m`) {.col-span-2}
+
+| Hash Type     | Mode  | Description               |
+| ------------- | ----- | ------------------------- |
+| MD5           | 0     | `md5($pass)`              |
+| SHA1          | 100   | `sha1($pass)`             |
+| SHA256        | 1400  | `sha256($pass)`           |
+| NTLM          | 1000  | NT Hash (Windows)         |
+| bcrypt        | 3200  | Blowfish (Unix `$2*$`)    |
+| WPA/WPA2      | 22000 | Wi-Fi handshake (HC22000) |
+| LM            | 3000  | LAN Manager (legacy)      |
+| WordPress MD5 | 400   | `md5($pass.$salt)`        |
+
+### 🎯 Attack Modes (`-a`) {.col-span-1}
+
+| Mode | Type                 | Description              |
+| ---- | -------------------- | ------------------------ |
+| 0    | Dictionary           | Wordlist attack          |
+| 1    | Combination          | Combine two wordlists    |
+| 3    | Brute-force (Mask)   | Try every combination    |
+| 6    | Hybrid Wordlist+Mask | Append mask to wordlist  |
+| 7    | Hybrid Mask+Wordlist | Prepend mask to wordlist |
+
+### 📂 Examples {.col-span-2}
+
+#### Dictionary Attack
+
+```bash
+hashcat -m 0 -a 0 hashes.txt rockyou.txt
+```
+
+#### Brute-force (Mask Attack)
+
+```bash
+hashcat -m 0 -a 3 hashes.txt ?a?a?a?a?a
+```
+
+#### Hybrid Attack (Wordlist + Mask)
+
+```bash
+hashcat -m 0 -a 6 hashes.txt rockyou.txt ?d?d
+```
+
+#### Resume Cracking
+
+```bash
+hashcat --restore
+```
+
+#### Show Cracked Passwords
+
+```bash
+hashcat -m 0 -a 0 hashes.txt rockyou.txt --show
+```
+
+---
+
+### 🛠️ Useful Options
+
+| Option              | Description                      |
+| ------------------- | -------------------------------- |
+| `--force`           | Bypass warnings (use cautiously) |
+| `--show`            | Show cracked results             |
+| `--username`        | Ignore usernames in hashfile     |
+| `--status`          | Show live cracking status        |
+| `--outfile`         | Save cracked hashes to file      |
+| `--increment`       | Enable incremental mask attack   |
+| `--session <name>`  | Save or resume by session name   |
+| `--restore`         | Resume from session              |
+| `--potfile-disable` | Don't write to `.potfile`        |
+
+---
+
+### 🔍 Masks Reference {.row-span-2}
+
+| Mask | Characters        |
+| ---- | ----------------- |
+| ?l   | Lowercase letters |
+| ?u   | Uppercase letters |
+| ?d   | Digits            |
+| ?s   | Symbols           |
+| ?a   | All above (luds)  |
+| ?b   | All 8-bit bytes   |
+
+### 📁 Save Cracked Hashes {.col-span-2}
+
+```bash
+hashcat -m 0 -a 0 hashes.txt rockyou.txt -o cracked.txt
+```
+
+### 📌 Bonus: Convert Captures for WPA/WPA2 {.col-span-2}
+
+**PCAP to Hashcat (HC22000) Format**
+
+```bash
+hcxpcapngtool -o hash.hc22000 capture.pcapng
+```

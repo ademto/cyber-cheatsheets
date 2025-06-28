@@ -1,0 +1,76 @@
+---
+title: Amass
+slug: amass
+description: In-depth attack surface mapping and external asset discovery.
+categories: ["Reconnaissance", "Enumeration"]
+bgColor: "bg-pink-100"
+textColor: "text-pink-900"
+top: true
+---
+
+export const metadata = {
+  title: "Amass",
+  category: "Reconnaissance",
+  slug: "amass",
+};
+
+## 🕸️ Amass Cheatsheet {.cols-2}
+
+### 🧩 Basic Usage
+
+| Command                                     | Description                                                |
+| ------------------------------------------- | ---------------------------------------------------------- |
+| `amass enum -d example.com`                 | Perform passive & active enumeration on `example.com`.     |
+| `amass enum -d example.com -o output.txt`   | Save discovered subdomains to `output.txt`.                |
+| `amass enum -d example.com -v`              | Enable verbose output during enumeration.                  |
+| `amass enum -d example.com -active`         | Perform active enumeration (e.g., brute forcing, probing). |
+| `amass enum -d example.com -brute`          | Enable brute-force mode using default wordlist.            |
+| `amass enum -d example.com -w wordlist.txt` | Use a custom wordlist for brute-forcing.                   |
+| `amass enum -ip -d example.com`             | Include IPs of resolved subdomains.                        |
+
+---
+
+### ⚙️ Common Options
+
+| Option          | Description                                     |
+| --------------- | ----------------------------------------------- |
+| `-d <domain>`   | Target domain to enumerate.                     |
+| `-o <file>`     | Output discovered names to a file.              |
+| `-ip`           | Display IP addresses of discovered domains.     |
+| `-brute`        | Enable brute-force subdomain enumeration.       |
+| `-w <wordlist>` | Custom wordlist for brute-force.                |
+| `-r <resolver>` | Use custom DNS resolvers.                       |
+| `-active`       | Use active techniques to discover more domains. |
+| `-src`          | Show data sources for each discovery.           |
+| `-v`            | Verbose mode.                                   |
+| `-h`            | Help menu.                                      |
+
+---
+
+### 🧪 Example Scans {.col-span-2}
+
+```bash
+# Passive subdomain enumeration
+amass enum -d example.com
+
+# Brute-force subdomains using a custom wordlist
+amass enum -d example.com -brute -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt
+
+# Save results to a file
+amass enum -d example.com -o subs.txt
+
+# Include IPs and verbose output
+amass enum -ip -v -d example.com
+
+# Use custom resolvers
+amass enum -d example.com -r resolvers.txt
+
+# Show source of each result
+amass enum -d example.com -src
+
+# Active scan (e.g., DNS probing)
+amass enum -d example.com -active
+
+# Help screen
+amass -h
+```

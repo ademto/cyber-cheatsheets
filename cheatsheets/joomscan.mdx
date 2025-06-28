@@ -1,0 +1,77 @@
+---
+title: Joomscan
+slug: joomscan
+description: Joomla CMS vulnerability scanner and enumeration tool.
+categories: ["Enumeration", "Web Application Security"]
+bgColor: "bg-sky-100"
+textColor: "text-sky-900"
+top: true
+---
+
+export const metadata = {
+  title: "Joomscan",
+  category: "Enumeration",
+  slug: "joomscan",
+};
+
+## 🧰 JoomScan Cheatsheet {.cols-2}
+
+### ⚙️ Installation
+
+| Command                                           | Description                   |
+| ------------------------------------------------- | ----------------------------- |
+| `git clone https://github.com/OWASP/joomscan.git` | Clone JoomScan repo           |
+| `cd joomscan`                                     | Change into cloned directory  |
+| `chmod +x joomscan.pl`                            | Make the script executable    |
+| `sudo cpan install Bundle::LWP`                   | Install required Perl modules |
+| `./joomscan.pl`                                   | Run the tool manually         |
+
+### 🔍 Basic Usage
+
+| Command                                | Description                         |
+| -------------------------------------- | ----------------------------------- |
+| `./joomscan.pl -u https://example.com` | Start scan on specified Joomla site |
+| `./joomscan.pl -h`                     | Show help information               |
+| `./joomscan.pl --version`              | Display current version             |
+| `./joomscan.pl --update`               | Update the tool                     |
+| `./joomscan.pl --health`               | Perform internal health check       |
+
+### 🧪 Scan Enhancements {.row-span-2}
+
+| Command                           | Description                              |
+| --------------------------------- | ---------------------------------------- |
+| `--random-agent`                  | Use a random User-Agent                  |
+| `--user-agent "CustomAgent"`      | Use a custom User-Agent                  |
+| `--rate-limit 10`                 | Throttle requests (10/sec in this case)  |
+| `--timeout 5`                     | Set request timeout (seconds)            |
+| `--detect-firewall`               | Detect web application firewall          |
+| `--enum-users`                    | Enumerate Joomla users                   |
+| `--check-vulns`                   | Scan for known vulnerabilities           |
+| `--enum-plugins`                  | Enumerate plugins/extensions             |
+| `--check-config`                  | Look for Joomla misconfigurations        |
+| `--brute --wordlist wordlist.txt` | Run brute-force test with given wordlist |
+| `--find-logs`                     | Search for accessible log files          |
+| `--find-backups`                  | Search for common backup file locations  |
+
+### 💾 Output and Reporting
+
+| Command                 | Description                            |
+| ----------------------- | -------------------------------------- |
+| `-o output.txt`         | Save output to file                    |
+| `--output-json`         | Output in JSON format                  |
+| `--store-requests`      | Save HTTP requests/responses           |
+| `--verbose`             | Enable detailed output                 |
+| `--resume session.json` | Resume previous scan from session file |
+
+### 📚 Target Management
+
+| Command                                 | Description            |
+| --------------------------------------- | ---------------------- |
+| `-l targets.txt -u https://example.com` | Load targets from file |
+
+✅ **Tip:** Always update JoomScan before scanning (`--update`). Combine with tools like `whatweb` or `nmap` for deeper enumeration.
+
+### 🔗 Resources
+
+- [OWASP JoomScan GitHub](https://github.com/OWASP/joomscan)
+- [TryHackMe Joomla Room](https://tryhackme.com/room/joomla)

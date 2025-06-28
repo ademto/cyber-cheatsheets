@@ -1,0 +1,117 @@
+---
+title: Recon-ng
+slug: recon-ng
+description: Web reconnaissance framework for information gathering.
+categories: ["Reconnaissance", "Information Gathering"]
+bgColor: "bg-indigo-100"
+textColor: "text-indigo-900"
+top: true
+---
+
+export const metadata = {
+  title: "Recon-ng",
+  category: "Reconnaissance",
+  slug: "recon-ng",
+};
+
+## 🕵️ Recon-ng Cheatsheet {.cols-1}
+
+Recon-ng is a powerful web reconnaissance framework with a modular structure, similar to Metasploit.
+
+##
+
+### 🧰 Installation & Setup
+
+| Command                                                                                               | Description                        |
+| ----------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| `sudo apt install recon-ng`                                                                           | Install Recon-ng on Debian/Ubuntu. |
+| `git clone https://github.com/lanmaster53/recon-ng.git && cd recon-ng && pip install -r REQUIREMENTS` | Manual installation from GitHub.   |
+| `recon-ng`                                                                                            | Launch the Recon-ng console.       |
+
+### ⚙️ Workspace Management
+
+| Command                    | Description                      |
+| -------------------------- | -------------------------------- |
+| `workspaces`               | List all existing workspaces.    |
+| `workspaces create <name>` | Create a new workspace.          |
+| `workspaces select <name>` | Switch to an existing workspace. |
+| `workspaces delete <name>` | Delete a workspace.              |
+
+### 📥 Importing Data
+
+| Command                      | Description                         |
+| ---------------------------- | ----------------------------------- |
+| `db insert domains <domain>` | Insert a domain into the database.  |
+| `db insert hosts <host>`     | Insert a host into the database.    |
+| `db insert companies <name>` | Insert a company into the database. |
+| `db import <file>`           | Import data from a CSV file.        |
+
+### 📦 Module Management
+
+| Command                      | Description                    |
+| ---------------------------- | ------------------------------ |
+| `modules search <keyword>`   | Search for modules by keyword. |
+| `modules load <module path>` | Load a specific module.        |
+| `modules reload`             | Reload all modules.            |
+| `show modules`               | List all available modules.    |
+
+### ⚙️ Running Modules
+
+| Command                | Description                                                      |
+| ---------------------- | ---------------------------------------------------------------- |
+| `use <module>`         | Load a module (e.g., `use recon/domains-hosts/bing_domain_web`). |
+| `show options`         | Show options required by the current module.                     |
+| `set <option> <value>` | Set a value for a module option.                                 |
+| `run`                  | Execute the loaded module.                                       |
+
+### 🔍 Common Recon Modules
+
+| Module                                | Description                                |
+| ------------------------------------- | ------------------------------------------ |
+| `recon/domains-hosts/bing_domain_web` | Find hosts using Bing search engine.       |
+| `recon/domains-vulnerabilities/xssed` | Find XSS vulnerabilities.                  |
+| `recon/domains-contacts/whois_pocs`   | Get contact info from Whois records.       |
+| `recon/hosts-hosts/resolve`           | Resolve hostnames to IP addresses.         |
+| `recon/hosts-ports/shodan_hostname`   | Get open ports via Shodan.                 |
+| `recon/hosts-domains/reverse_resolve` | Reverse resolve IP addresses to hostnames. |
+
+### 📤 Exporting Data
+
+| Command                  | Description                        |
+| ------------------------ | ---------------------------------- |
+| `show tables`            | Show data tables in the workspace. |
+| `select * from <table>`  | View data in a specific table.     |
+| `export csv <filename>`  | Export data to a CSV file.         |
+| `report html <filename>` | Generate a full HTML report.       |
+
+### 🛠 Other Useful Commands
+
+| Command                     | Description                   |
+| --------------------------- | ----------------------------- |
+| `keys add <service> <key>`  | Add an API key for a service. |
+| `keys list`                 | List added API keys.          |
+| `marketplace search <term>` | Search for external modules.  |
+| `help`                      | Show help information.        |
+| `exit`                      | Exit Recon-ng.                |
+
+### 🧪 Example Workflow
+
+```bash
+# Start Recon-ng
+recon-ng
+
+# Create and use a workspace
+workspaces create test
+workspaces select test
+
+# Add a domain and run a module
+db insert domains example.com
+use recon/domains-hosts/bing_domain_web
+set SOURCE example.com
+run
+
+# Export results
+show tables
+select * from hosts
+export csv example_hosts.csv
+```

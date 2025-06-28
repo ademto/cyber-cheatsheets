@@ -1,0 +1,187 @@
+---
+title: Linux
+slug: linux
+description: Essential Linux commands for system administration and security.
+categories: ["Essential Tools", "System Administration"]
+bgColor: "bg-slate-100"
+textColor: "text-slate-900"
+top: true
+---
+
+export const metadata = {
+  title: "Linux",
+  category: "Essential Tools",
+  slug: "linux",
+};
+
+## 🐧 Linux Command Cheatsheet {.cols-2}
+
+### 📁 File and Directory Management {.row-span-2}
+
+| Command                 | Description                                    |
+| ----------------------- | ---------------------------------------------- |
+| `ls`                    | List files in current directory                |
+| `ls -la`                | List all files with details (including hidden) |
+| `cd /path/to/directory` | Change directory                               |
+| `pwd`                   | Print current working directory                |
+| `mkdir dirname`         | Create new directory                           |
+| `mkdir -p parent/child` | Create nested directories                      |
+| `rm file`               | Remove file                                    |
+| `rm -r directory`       | Remove directory recursively                   |
+| `rm -f file`            | Force remove file without prompt               |
+| `cp source dest`        | Copy file or directory                         |
+| `cp -r source dest`     | Copy directory recursively                     |
+| `mv source dest`        | Move or rename file/directory                  |
+| `touch filename`        | Create empty file or update timestamp          |
+| `cat file`              | Display file contents                          |
+| `head -n 10 file`       | Show first 10 lines                            |
+| `tail -n 10 file`       | Show last 10 lines                             |
+| `tail -f file`          | Follow file for live updates                   |
+| `find /path -name file` | Search for files by name                       |
+| `file filename`         | Show file type                                 |
+
+### 🛠️ File Permissions and Ownership
+
+| Command                     | Description                                  |
+| --------------------------- | -------------------------------------------- |
+| `ls -l`                     | Show detailed file info                      |
+| `chmod 755 file`            | Change file permissions (rwxr-xr-x)          |
+| `chmod u+rwx file`          | Add read, write, execute permissions to user |
+| `chmod -R 644 /path/dir`    | Apply permissions recursively                |
+| `chown user:group file`     | Change file owner and group                  |
+| `chown -R user:group /path` | Change ownership recursively                 |
+| `stat file`                 | Show detailed file metadata                  |
+
+### 🖥️ Process Management
+
+| Command               | Description                         |
+| --------------------- | ----------------------------------- |
+| `ps aux`              | Show all running processes          |
+| `ps -ef`              | Show detailed process list          |
+| `top`                 | Interactive process viewer          |
+| `htop`                | Enhanced interactive process viewer |
+| `kill PID`            | Terminate process by PID            |
+| `kill -9 PID`         | Force kill process                  |
+| `pkill processname`   | Kill processes by name              |
+| `killall processname` | Kill all instances of a process     |
+| `nice -n 10 command`  | Run command with adjusted priority  |
+| `jobs`                | List background jobs                |
+| `fg %1`               | Bring job #1 to foreground          |
+| `bg %1`               | Resume job #1 in background         |
+
+### 📡 Networking
+
+| Command                        | Description                      |
+| ------------------------------ | -------------------------------- |
+| `ip a`                         | Show network interfaces and IPs  |
+| `ifconfig`                     | Show network interfaces (legacy) |
+| `ping example.com`             | Ping a host                      |
+| `traceroute example.com`       | Trace network route              |
+| `netstat -tuln`                | List listening ports             |
+| `ss -tuln`                     | Show socket statistics (modern)  |
+| `curl http://example.com`      | Fetch URL content                |
+| `wget http://example.com/file` | Download files                   |
+| `dig example.com`              | DNS lookup                       |
+| `nslookup example.com`         | DNS lookup                       |
+| `tcpdump -i eth0`              | Capture network packets          |
+| `scp file user@host:/path`     | Secure copy file to remote host  |
+| `ssh user@hostname`            | Connect to remote host via SSH   |
+
+### 📦 Package Management
+
+| Distro               | Command Example                       | Description                     |
+| -------------------- | ------------------------------------- | ------------------------------- |
+| Debian/Ubuntu        | `sudo apt update && sudo apt upgrade` | Update packages                 |
+|                      | `sudo apt install package`            | Install package                 |
+|                      | `sudo apt remove package`             | Remove package                  |
+| RedHat/CentOS/Fedora | `sudo yum update`                     | Update packages                 |
+|                      | `sudo yum install package`            | Install package                 |
+|                      | `sudo yum remove package`             | Remove package                  |
+|                      | `sudo dnf install package`            | Install package (modern RedHat) |
+| Arch Linux           | `sudo pacman -Syu`                    | Update system                   |
+|                      | `sudo pacman -S package`              | Install package                 |
+
+### 📂 Disk Usage and Storage
+
+| Command           | Description              |
+| ----------------- | ------------------------ |
+| `df -h`           | Show disk space usage    |
+| `du -sh /path`    | Show directory size      |
+| `mount`           | Show mounted filesystems |
+| `umount /dev/sdX` | Unmount filesystem       |
+| `lsblk`           | List block devices       |
+
+### 🧰 System Information
+
+| Command               | Description               |
+| --------------------- | ------------------------- |
+| `uname -a`            | Kernel and system info    |
+| `cat /etc/os-release` | OS version details        |
+| `hostname`            | Show hostname             |
+| `uptime`              | Show system uptime        |
+| `free -h`             | Show memory usage         |
+| `vmstat`              | Show virtual memory stats |
+| `dmesg`               | Show kernel logs          |
+| `whoami`              | Show current user         |
+| `lscpu`               | CPU information           |
+| `lshw`                | List hardware             |
+| `lsblk`               | List block devices        |
+
+### 📝 Text Processing
+
+| Command                   | Description             |
+| ------------------------- | ----------------------- |
+| `grep "pattern" file`     | Search for text pattern |
+| `grep -r "pattern" /path` | Recursive search        |
+| `sed 's/old/new/g' file`  | Replace text            |
+| `awk '{print $1}' file`   | Print first column      |
+| `cut -d',' -f1 file`      | Cut fields by delimiter |
+| `sort file`               | Sort lines              |
+| `uniq file`               | Remove duplicate lines  |
+| `wc -l file`              | Count lines             |
+
+### 🔒 User Management and Permissions
+
+| Command                  | Description                 |
+| ------------------------ | --------------------------- |
+| `sudo adduser username`  | Add new user                |
+| `sudo deluser username`  | Delete user                 |
+| `passwd username`        | Change user password        |
+| `usermod -aG group user` | Add user to group           |
+| `groups username`        | Show groups user belongs to |
+| `sudo -i`                | Switch to root              |
+| `su - username`          | Switch to another user      |
+| `sudo command`           | Run command as root         |
+
+### ⚙️ Systemctl & Service Management
+
+| Command                     | Description             |
+| --------------------------- | ----------------------- |
+| `systemctl status service`  | Show status of service  |
+| `systemctl start service`   | Start service           |
+| `systemctl stop service`    | Stop service            |
+| `systemctl restart service` | Restart service         |
+| `systemctl enable service`  | Enable service on boot  |
+| `systemctl disable service` | Disable service on boot |
+| `journalctl -u service`     | View service logs       |
+
+### 🧰 Compression and Archiving
+
+| Command                          | Description              |
+| -------------------------------- | ------------------------ |
+| `tar -cvf archive.tar /path`     | Create tar archive       |
+| `tar -zcvf archive.tar.gz /path` | Create compressed tar.gz |
+| `tar -jxvf archive.tar.bz2`      | Extract tar.bz2 archive  |
+| `zip -r archive.zip /path`       | Create zip archive       |
+| `unzip archive.zip`              | Extract zip archive      |
+
+### 🧰 Miscellaneous
+
+| Command             | Description                |
+| ------------------- | -------------------------- |
+| `date`              | Show current date and time |
+| `cal`               | Show calendar              |
+| `history`           | Show command history       |
+| `alias ll='ls -la'` | Create alias               |
+| `clear`             | Clear terminal screen      |
+| `watch command`     | Run command repeatedly     |

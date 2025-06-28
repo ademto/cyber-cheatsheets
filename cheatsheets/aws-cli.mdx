@@ -1,0 +1,121 @@
+---
+title: AWS CLI
+slug: aws-cli
+description: Manage AWS services from the command line.
+categories: ["Cloud Security"]
+bgColor: "bg-blue-200"
+textColor: "text-blue-800"
+top: false
+---
+
+export const metadata = {
+  title: "AWS CLI",
+  category: "Cloud Security",
+  slug: "aws-cli",
+};
+
+## AWS CLI Cheatsheet {.cols-2}
+
+### 🧰 Setup
+
+| Command                                                                             | Description                                           |
+| ----------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| `curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"` | Download AWS CLI installer for Linux                  |
+| `unzip awscliv2.zip && sudo ./aws/install`                                          | Unzip and install AWS CLI                             |
+| `aws configure`                                                                     | Configure AWS CLI with credentials and default region |
+| `aws configure list`                                                                | View current configuration                            |
+| `aws configure set region us-east-1`                                                | Set default region in config                          |
+| `aws configure set output json`                                                     | Set default output format                             |
+| `aws --version`                                                                     | Check installed AWS CLI version                       |
+
+### 🔐 IAM
+
+| Command                                                                                                | Description                   |
+| ------------------------------------------------------------------------------------------------------ | ----------------------------- |
+| `aws iam list-users`                                                                                   | List all IAM users            |
+| `aws iam create-user --user-name <username>`                                                           | Create a new IAM user         |
+| `aws iam attach-user-policy --user-name <username> --policy-arn arn:aws:iam::aws:policy/<policy_name>` | Attach managed policy to user |
+| `aws iam create-access-key --user-name <username>`                                                     | Create access key for a user  |
+| `aws iam list-roles`                                                                                   | List all IAM roles            |
+
+### ☁️ S3
+
+| Command                                               | Description                                         |
+| ----------------------------------------------------- | --------------------------------------------------- |
+| `aws s3 ls`                                           | List all S3 buckets                                 |
+| `aws s3 mb s3://<bucket-name>`                        | Make a new bucket                                   |
+| `aws s3 rb s3://<bucket-name> --force`                | Remove a bucket and its contents                    |
+| `aws s3 cp <local-file> s3://<bucket-name>/<key>`     | Upload a file to S3                                 |
+| `aws s3 cp s3://<bucket-name>/<key> <local-file>`     | Download a file from S3                             |
+| `aws s3 sync <local-dir> s3://<bucket-name> --delete` | Sync local directory to S3 and delete missing files |
+| `aws s3 rm s3://<bucket>/<file>`                      | Delete a file from a bucket                         |
+
+### 🖥️ EC2
+
+| Command                                                    | Description                    |
+| ---------------------------------------------------------- | ------------------------------ |
+| `aws ec2 describe-instances`                               | List all EC2 instances         |
+| `aws ec2 start-instances --instance-ids <instance-id>`     | Start an EC2 instance          |
+| `aws ec2 stop-instances --instance-ids <instance-id>`      | Stop an EC2 instance           |
+| `aws ec2 reboot-instances --instance-ids <instance-id>`    | Reboot an EC2 instance         |
+| `aws ec2 terminate-instances --instance-ids <instance-id>` | Terminate an EC2 instance      |
+| `aws ec2 describe-instance-types`                          | Get EC2 instance type details  |
+| `aws ec2 describe-regions`                                 | List all available AWS regions |
+
+### 🔄 Lambda
+
+| Command                                                                                         | Description                   |
+| ----------------------------------------------------------------------------------------------- | ----------------------------- |
+| `aws lambda list-functions`                                                                     | List Lambda functions         |
+| `aws lambda invoke --function-name <function-name> output.json`                                 | Invoke a Lambda function      |
+| `aws lambda update-function-code --function-name <function-name> --zip-file fileb://<file>.zip` | Update function code with ZIP |
+
+### 📦 CloudFormation
+
+| Command                                                                                                                   | Description                           |
+| ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| `aws cloudformation deploy --template-file <template.yaml> --stack-name <stack-name> --capabilities CAPABILITY_NAMED_IAM` | Deploy a CloudFormation stack         |
+| `aws cloudformation delete-stack --stack-name <stack-name>`                                                               | Delete a CloudFormation stack         |
+| `aws cloudformation describe-stacks --stack-name <stack-name>`                                                            | Describe a stack's status and details |
+| `aws cloudformation create-stack --stack-name <stack> --template-body file://template.yaml`                               | Create a new CloudFormation stack     |
+
+### 📊 CloudWatch
+
+| Command                                                                      | Description                     |
+| ---------------------------------------------------------------------------- | ------------------------------- |
+| `aws logs describe-log-groups`                                               | List log groups                 |
+| `aws logs describe-log-streams --log-group-name <name>`                      | List log streams in a log group |
+| `aws logs get-log-events --log-group-name <name> --log-stream-name <stream>` | Retrieve log events             |
+
+### 🐳 ECS
+
+| Command                                          | Description                 |
+| ------------------------------------------------ | --------------------------- |
+| `aws ecs list-clusters`                          | List ECS clusters           |
+| `aws ecs describe-clusters --clusters <cluster>` | Describe a specific cluster |
+| `aws ecs list-tasks --cluster <cluster>`         | List ECS tasks in a cluster |
+
+### 🧰 General {.row-span-2}
+
+| Command                                  | Description                                     |
+| ---------------------------------------- | ----------------------------------------------- | ---- | ------ | ----------------------- |
+| `aws sts get-caller-identity`            | Get current authenticated IAM identity          |
+| `aws <command> --profile <profile-name>` | Run command using a specific named profile      |
+| `aws <command> --region <region>`        | Run command in a specific region                |
+| `aws <command> --output json             | yaml                                            | text | table` | Customize output format |
+| `aws <command> --query '<JMESPath>'`     | Filter output with JMESPath                     |
+| `aws <command> --dry-run`                | Simulate command without execution (if allowed) |
+
+### 📚 Help
+
+| Command                        | Description                      |
+| ------------------------------ | -------------------------------- |
+| `aws help`                     | General help for AWS CLI         |
+| `aws <service> help`           | Show help for a service          |
+| `aws <service> <command> help` | Show help for a specific command |
+
+### ✅ Tip
+
+- Use `--profile <profile-name>` and `--region <region>` to manage multiple AWS accounts and regions.
+- Use `--output` and `--query` to format and filter responses efficiently.
+- Use `--dry-run` to test actions without making changes.

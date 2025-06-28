@@ -1,0 +1,116 @@
+---
+title: Snort
+slug: snort
+description: Intrusion detection and prevention system.
+categories: ["SOC", "Network Security"]
+bgColor: "bg-blue-300"
+textColor: "text-blue-900"
+top: false
+---
+
+export const metadata = {
+  title: "Snort",
+  category: "SOC",
+  slug: "snort",
+};
+
+## 🐍 Snort 101 Cheatsheet {.cols-2}
+
+### 📦 Global Commands
+
+| Command          | Description                   |
+| ---------------- | ----------------------------- |
+| `snort -V`       | Display Snort version         |
+| `snort -version` | Display detailed version info |
+| `snort -q`       | Suppress version banner       |
+| `snort -i eth0`  | Use specific interface        |
+
+### 🕵️ Sniffer Mode
+
+| Command          | Description                        |
+| ---------------- | ---------------------------------- |
+| `snort -v`       | Verbose mode (packet headers only) |
+| `snort -d`       | Show data payload                  |
+| `snort -e`       | Show link-layer headers            |
+| `snort -X`       | Show full packet details in HEX    |
+| `snort -eX`      | Display all packet details         |
+| `snort -v -n 10` | Sniff only 10 packets              |
+
+### 🧱 IDS/IPS Mode
+
+| Command                             | Description              |
+| ----------------------------------- | ------------------------ |
+| `snort -c /etc/snort/snort.conf`    | Use config file          |
+| `snort -T -c /etc/snort/snort.conf` | Test config and instance |
+| `snort -c /etc/snort/snort.conf -N` | Disable packet logging   |
+| `snort -c /etc/snort/snort.conf -D` | Run Snort in background  |
+
+### 🚨 Alert Modes
+
+| Command      | Description                    |
+| ------------ | ------------------------------ |
+| `-A none`    | No output alerts               |
+| `-A console` | Alerts to console              |
+| `-A cmg`     | Console output with CMG format |
+| `-A fast`    | File-based fast alerts         |
+| `-A full`    | Full alerts with packet info   |
+
+### 🗂 Logger Mode
+
+| Command                            | Description         |
+| ---------------------------------- | ------------------- |
+| `-l /path/to/dir`                  | Custom log path     |
+| `-K ASCII`                         | Log in ASCII format |
+| Default log path: `/var/log/snort` |                     |
+
+### 📂 PCAP Processing {.row-span-2}
+
+| Command                                                                            | Description                           |
+| ---------------------------------------------------------------------------------- | ------------------------------------- |
+| `snort -r snort.log`                                                               | Read Snort log file                   |
+| `snort -v -r snort.log -n 10`                                                      | Read N packets from log               |
+| `snort -v -r snort.log tcp`                                                        | Filter TCP packets                    |
+| `snort -v -r snort.log 'udp and port 53'`                                          | Filter UDP packets to port 53         |
+| `snort -c /etc/snort/snort.conf -q -r file.pcap -A console`                        | Process single pcap                   |
+| `snort -c /etc/snort/snort.conf -q --pcap-list="file1.pcap file2.pcap" -A console` | Process multiple pcaps                |
+| `snort -c /etc/snort/snort.conf -q --pcap-dir=/path/to/pcaps -A console`           | Process all pcaps in directory        |
+| `--pcap-show`                                                                      | Display pcap filenames during process |
+
+### 🧱 Rule Header Components
+
+- **Action:** `alert`, `log`, `pass`, `drop`
+- **Protocol:** `tcp`, `udp`, `icmp`, `ip`
+- **Source/Destination IP & Port:** Can be specific values or variables like `$HOME_NET`, `any`
+- **Direction:** `->` (unidirectional), `<->` (bidirectional)
+
+### 🧬 Snort Rule Structure
+
+```text
+alert tcp $EXTERNAL_NET any -> $HOME_NET $HTTP_PORTS (
+  msg:"Directory Traversal Attempt!";
+  flow:established;
+  nocase;
+  content:"HTTP";
+  fast_pattern;
+  content:"|2E 2E 2F|";
+  content:"/..";
+  session:all;
+  reference:CVE,XXX;
+  sid:100001;
+  rev:1;
+)
+```
+
+### 🔍 Rule Options Overview
+
+| Option         | Purpose                               |
+| -------------- | ------------------------------------- |
+| `msg`          | Alert message                         |
+| `sid`          | Snort rule ID                         |
+| `rev`          | Rule revision number                  |
+| `content`      | Match specific content in packet      |
+| `nocase`       | Case-insensitive content match        |
+| `flow`         | TCP stream direction/context          |
+| `fast_pattern` | Prioritize content match optimization |
+| `session`      | Extract user data from TCP sessions   |
+| `reference`    | Link to CVE, documentation, etc.      |

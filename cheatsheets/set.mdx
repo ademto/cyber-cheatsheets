@@ -1,0 +1,119 @@
+---
+title: SET
+slug: set
+description: Social engineering toolkit for phishing and credential harvesting.
+categories: ["Social Engineering", "Exploitation"]
+bgColor: "bg-orange-200"
+textColor: "text-orange-900"
+top: true
+---
+
+export const metadata = {
+  title: "SET",
+  category: "Exploitation",
+  slug: "set",
+};
+
+## 🎭 Social-Engineer Toolkit (SET) Cheatsheet {.cols-1}
+
+SET is an open-source Python tool used for social engineering attacks, developed by TrustedSec.
+
+## {.cols-2}
+
+### ⚙️ Installation
+
+| Method             | Command                                                               |
+| ------------------ | --------------------------------------------------------------------- |
+| Clone from GitHub  | `git clone https://github.com/trustedsec/social-engineer-toolkit.git` |
+| Navigate to folder | `cd social-engineer-toolkit`                                          |
+| Run setup          | `sudo python3 setup.py`                                               |
+| Launch SET         | `sudo setoolkit`                                                      |
+
+### 🏁 Starting the Toolkit
+
+| Task                     | Command          |
+| ------------------------ | ---------------- |
+| Start the toolkit (menu) | `sudo setoolkit` |
+
+### 📋 Main Menu Options
+
+| Option | Description                        |
+| ------ | ---------------------------------- |
+| 1      | Social-Engineering Attacks         |
+| 2      | Penetration Testing (Fast-Track)   |
+| 3      | Third Party Modules                |
+| 4      | Update the Social-Engineer Toolkit |
+| 5      | Update SET configuration           |
+| 6      | Help, Credits, and About           |
+
+### 🎯 Social Engineering Attack Vectors (Option 1)
+
+| Option | Description                                      |
+| ------ | ------------------------------------------------ |
+| 1      | Spear-Phishing Attack Vectors                    |
+| 2      | Website Attack Vectors                           |
+| 3      | Infectious Media Generator                       |
+| 4      | Create a Payload and Listener                    |
+| 5      | Mass Mailer Attack                               |
+| 6      | Arduino-Based Attack Vector                      |
+| 7      | SMS Spoofing Attack Vector (Paid service needed) |
+| 8      | Wireless Access Point Attack Vector              |
+| 9      | QRCode Generator Attack Vector                   |
+| 10     | Powershell Attack Vectors                        |
+| 11     | Third Party Modules                              |
+| 99     | Return to Main Menu                              |
+
+### 💌 Spear-Phishing Attack Vectors (Option 1 > 1)
+
+| Option | Description                          |
+| ------ | ------------------------------------ |
+| 1      | Perform a Mass Email Attack          |
+| 2      | Create a FileFormat Payload          |
+| 3      | Create a Social-Engineering Template |
+| 4      | Return to Main Menu                  |
+
+### 🌐 Website Attack Vectors (Option 1 > 2)
+
+| Option | Description                        |
+| ------ | ---------------------------------- |
+| 1      | Java Applet Attack Method          |
+| 2      | Metasploit Browser Exploit Method  |
+| 3      | Credential Harvester Attack Method |
+| 4      | Tabnabbing Attack Method           |
+| 5      | Web Jacking Attack Method          |
+| 6      | Multi-Attack Web Method            |
+| 7      | HTA Attack Method                  |
+| 8      | Return to Main Menu                |
+
+### 🔐 Credential Harvester Setup Example
+
+| Step                  | Command or Option                        |
+| --------------------- | ---------------------------------------- |
+| Start SET             | `sudo setoolkit`                         |
+| Choose option         | `1` (Social-Engineering Attacks)         |
+| Choose option         | `2` (Website Attack Vectors)             |
+| Choose option         | `3` (Credential Harvester Attack)        |
+| Choose attack method  | `Site Cloner` or custom templates        |
+| Enter URL to clone    | e.g. `https://facebook.com`              |
+| SET starts web server | Credentials harvested on form submission |
+
+### 🧪 Payload and Listener (Option 1 > 4)
+
+| Payload Type        | Example Setup Step                               |
+| ------------------- | ------------------------------------------------ |
+| Windows Reverse TCP | `windows/meterpreter/reverse_tcp` via SET wizard |
+| Listener Port       | Enter desired port (e.g. `4444`)                 |
+| IP Address          | Enter attacker's IP (e.g. `192.168.1.10`)        |
+
+### 🛠️ Configuration File
+
+| File            | Path                                                     |
+| --------------- | -------------------------------------------------------- |
+| SET config      | `/etc/setoolkit/set.config` or `~/.setoolkit/set.config` |
+| Modify settings | Edit config to change default payloads, ports, etc.      |
+
+### 🆘 Useful Notes
+
+- SET is **menu-driven** — follow prompts interactively.
+- Use with **Kali Linux** or any Linux OS with Metasploit.
+- Requires **root privileges** for most features.

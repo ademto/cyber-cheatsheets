@@ -1,0 +1,125 @@
+---
+title: FFUF
+slug: ffuf
+description: Fast web fuzzer for discovering hidden files and directories.
+categories: ["Enumeration", "Web Application Security"]
+bgColor: "bg-lime-100"
+textColor: "text-lime-900"
+top: true
+---
+
+export const metadata = {
+  title: "FFUF",
+  category: "Enumeration",
+  slug: "ffuf",
+};
+
+## 🔍 FFuF (Fuzz Faster U Fool) Cheat Sheet {.cols-2}
+
+### 🛠️ Basic Commands
+
+| Command                                          | Description                                           |
+| ------------------------------------------------ | ----------------------------------------------------- |
+| `ffuf -u <URL/FUZZ> -w <wordlist>`               | Basic directory/file brute-forcing                    |
+| `ffuf -u <URL/FUZZ> -w <wordlist> -e <ext>`      | Brute-force with file extensions (e.g., `.php,.html`) |
+| `ffuf -u http://FUZZ.example.com/ -w <wordlist>` | Subdomain brute-force                                 |
+| `ffuf -u <URL>?FUZZ=value -w <wordlist>`         | Brute-force query parameters                          |
+| `ffuf -u <URL/FUZZ> -w <wordlist> -o <output>`   | Save scan results                                     |
+| `ffuf -w <wordlist> -u <URL/FUZZ> -X POST`       | Use POST method for requests                          |
+
+---
+
+### 📁 Directory & File Enumeration
+
+| Command                                                                       | Description                   |
+| ----------------------------------------------------------------------------- | ----------------------------- |
+| `ffuf -u http://example.com/FUZZ -w /path/to/wordlist.txt`                    | Basic directory brute-forcing |
+| `ffuf -u http://example.com/FUZZ -w /path/to/wordlist.txt -e .php,.html,.txt` | Include file extensions       |
+| `ffuf -u http://example.com/FUZZ -w /path/to/wordlist.txt -t 50`              | Set number of threads         |
+| `ffuf -u http://example.com/FUZZ -w /path/to/wordlist.txt -recursion`         | Recursive fuzzing             |
+| `ffuf -u http://example.com/FUZZ -w /path/to/wordlist.txt -c`                 | Enable colored output         |
+
+---
+
+### 🔗 Parameter & GET Request Fuzzing
+
+| Command                                                                    | Description            |
+| -------------------------------------------------------------------------- | ---------------------- |
+| `ffuf -u http://example.com/index.php?FUZZ=value -w /path/to/wordlist.txt` | Brute-force parameters |
+| `ffuf -u http://example.com/index.php?id=FUZZ -w /path/to/wordlist.txt`    | Brute-force values     |
+
+---
+
+### 🌐 Subdomain Enumeration
+
+| Command                                                            | Description                |
+| ------------------------------------------------------------------ | -------------------------- |
+| `ffuf -u http://FUZZ.example.com/ -w /path/to/wordlist.txt`        | Subdomain brute-force      |
+| `ffuf -u http://FUZZ.example.com/ -w /path/to/wordlist.txt -t 100` | Set threads for subdomains |
+
+---
+
+### 🎯 Filter Results
+
+| Command                                        | Description                               |
+| ---------------------------------------------- | ----------------------------------------- |
+| `ffuf -u <URL/FUZZ> -w <wordlist> -fc <codes>` | Filter by HTTP status codes (e.g., `404`) |
+| `ffuf -u <URL/FUZZ> -w <wordlist> -fs <size>`  | Filter by response size                   |
+| `ffuf -u <URL/FUZZ> -w <wordlist> -fw <words>` | Filter by number of words                 |
+
+---
+
+### ⚙️ Advanced Options
+
+| Command                                               | Description                      |
+| ----------------------------------------------------- | -------------------------------- |
+| `ffuf -u <URL/FUZZ> -w <wordlist> -H 'Header: value'` | Add custom HTTP headers          |
+| `ffuf -u <URL/FUZZ> -w <wordlist> -X POST -d 'data'`  | Send POST requests with data     |
+| `ffuf -u <URL/FUZZ> -w <wordlist> --delay <seconds>`  | Set delay between requests       |
+| `ffuf -u <URL/FUZZ> -w <wordlist> -mc <code>`         | Match specific HTTP status codes |
+
+**Examples:**
+
+```bash
+ffuf -u http://example.com/FUZZ -w /usr/share/wordlists/dirb/common.txt -H "Authorization: Bearer <token>"
+ffuf -u http://example.com/login.php -w /usr/share/wordlists/dirb/common.txt -X POST -d "username=FUZZ&password=123456"
+```
+
+---
+
+### 📚 Wordlists
+
+- `/usr/share/wordlists/dirb/common.txt`
+- `/usr/share/seclists/Discovery/Web-Content/common.txt`
+- `/usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt`
+
+---
+
+### 💾 Saving Output
+
+| Command                                                   | Description                                      |
+| --------------------------------------------------------- | ------------------------------------------------ |
+| `ffuf -u <URL/FUZZ> -w <wordlist> -o <file> -of <format>` | Save output in a chosen format (e.g., JSON, CSV) |
+
+**Example:**
+
+```bash
+ffuf -u http://example.com/FUZZ -w /usr/share/wordlists/dirb/common.txt -o results.json -of json
+
+```
+
+---
+
+### 🧪 Example Scans {.col-span-2}
+
+```bash
+# Basic Directory Bruteforce
+ffuf -u http://example.com/FUZZ -w /usr/share/wordlists/dirb/common.txt
+
+# Subdomain Bruteforce
+ffuf -u http://FUZZ.example.com/ -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt
+
+# POST Request Parameter Fuzzing
+ffuf -u http://example.com/login.php -w /usr/share/wordlists/dirb/common.txt -X POST -d "username=FUZZ&password=123456"
+
+```

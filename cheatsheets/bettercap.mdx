@@ -1,0 +1,124 @@
+---
+title: Bettercap
+slug: bettercap
+description: Powerful network attack and monitoring framework.
+categories: ["Network Security", "Exploitation"]
+bgColor: "bg-pink-100"
+textColor: "text-pink-900"
+top: true
+---
+
+export const metadata = {
+  title: "Bettercap",
+  category: "Exploitation",
+  slug: "bettercap",
+};
+
+## 🎯 Bettercap Cheatsheet
+
+Bettercap is a powerful, flexible, and portable network attack and monitoring tool.
+
+##
+
+### ⚙️ Installation
+
+| Method            | Command                                            |
+| ----------------- | -------------------------------------------------- |
+| On Kali Linux     | Pre-installed                                      |
+| From apt (Debian) | `sudo apt install bettercap`                       |
+| From brew (macOS) | `brew install bettercap`                           |
+| From source       | `go install github.com/bettercap/bettercap@latest` |
+| Run after install | `bettercap -h`                                     |
+
+### 🏁 Starting Bettercap
+
+| Purpose                 | Command                               |
+| ----------------------- | ------------------------------------- |
+| Start Bettercap         | `sudo bettercap`                      |
+| Specify interface       | `sudo bettercap -iface eth0`          |
+| Specify gateway         | `sudo bettercap -gateway 192.168.1.1` |
+| Load commands from file | `sudo bettercap -caplet example.cap`  |
+| List available caplets  | `caplets.show`                        |
+
+### 🧰 Modules Overview
+
+| Module Name        | Description              |
+| ------------------ | ------------------------ |
+| `net.probe`        | Active network discovery |
+| `net.recon`        | Passive network recon    |
+| `net.sniff`        | Packet sniffer module    |
+| `net.sniff.filter` | BPF filter for sniffer   |
+| `net.show`         | Show network hosts       |
+| `net.scan`         | ARP and port scanning    |
+| `arp.spoof`        | ARP spoofing             |
+| `dns.spoof`        | DNS spoofing             |
+| `http.proxy`       | HTTP proxy module        |
+| `http.server`      | HTTP file server         |
+| `https.proxy`      | HTTPS MitM proxy         |
+| `hid.keyboard`     | Emulate keyboard input   |
+
+### 🔍 Recon and Scanning
+
+| Task                    | Command                 |
+| ----------------------- | ----------------------- |
+| Enable passive recon    | `net.recon on`          |
+| Enable active probing   | `net.probe on`          |
+| Show hosts              | `net.show`              |
+| Scan ports on host      | `net.scan 192.168.1.10` |
+| ARP scan entire network | `net.probe on`          |
+
+### 🎭 Spoofing & Sniffing
+
+| Task                    | Command                               |
+| ----------------------- | ------------------------------------- |
+| Enable ARP spoofing     | `arp.spoof on`                        |
+| Set ARP spoof target    | `set arp.spoof.targets 192.168.1.100` |
+| Enable DNS spoofing     | `dns.spoof on`                        |
+| Add DNS spoof entry     | `set dns.spoof.domains example.com`   |
+| Enable sniffer          | `net.sniff on`                        |
+| Set sniffer output file | `set net.sniff.output sniff.pcap`     |
+
+### 🔗 Proxy and Injection
+
+| Task                     | Command                                |
+| ------------------------ | -------------------------------------- |
+| Start HTTP proxy         | `http.proxy on`                        |
+| Set proxy scripts        | `set http.proxy.script jsinject.js`    |
+| Start HTTPS proxy (MitM) | `https.proxy on`                       |
+| Set HTTPS proxy port     | `set https.proxy.sslstrip true`        |
+| Launch fake HTTP server  | `http.server on`                       |
+| Serve file via HTTP      | `set http.server.path /home/user/file` |
+
+### 📡 Wireless Attacks
+
+| Task                 | Command                         |
+| -------------------- | ------------------------------- |
+| Start WiFi recon     | `wifi.recon on`                 |
+| Deauth a station     | `wifi.deauth XX:XX:XX:XX:XX:XX` |
+| Sniff probe requests | `wifi.show`                     |
+| Set WiFi interface   | `set wifi.interface wlan0`      |
+
+### ⌨️ HID Attacks
+
+| Task                      | Command                                |
+| ------------------------- | -------------------------------------- |
+| Emulate keyboard input    | `hid.keyboard on`                      |
+| Set payload for injection | `set hid.keyboard.payload 'Windows+R'` |
+
+### 📁 Caplets (Scripted Modules)
+
+| Task                   | Command                                    |
+| ---------------------- | ------------------------------------------ |
+| List available caplets | `caplets.show`                             |
+| Load a caplet          | `caplets.load arp-spoof.cap`               |
+| Write custom caplet    | Save commands into `.cap` file and load it |
+
+### 📌 Example Workflow
+
+```bash
+sudo bettercap -iface eth0
+set arp.spoof.targets 192.168.1.10
+arp.spoof on
+net.sniff on
+http.proxy on
+```

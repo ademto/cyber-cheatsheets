@@ -1,14 +1,73 @@
+---
+title: Hydra
+slug: hydra
+description: Fast and flexible network login cracker.
+categories: ["Exploitation", "Password Cracking"]
+bgColor: "bg-rose-100"
+textColor: "text-rose-900"
+top: true
+---
+
 export const metadata = {
   title: "Hydra",
-  category: "Password Cracking",
+  category: "Exploitation",
   slug: "hydra",
 };
 
-# Hydra Cheatsheet
+## Hydra Command Guide {.cols-2}
 
-Hydra is a fast and flexible password cracking tool.
+### 🔰 Getting Started
 
-## Examples
+| Function               | Command                | Example    |
+| ---------------------- | ---------------------- | ---------- |
+| Start Hydra Tool       | `hydra`                | `hydra`    |
+| Display Help           | `hydra -h` or `--help` | `hydra -h` |
+| Show Module Usage Info | `-U`                   | `hydra -U` |
 
-- `hydra -l admin -P passwords.txt ftp://target`
-- `hydra -V -f -u -L users.txt -P pass.txt ssh://host`
+---
+
+### 🎯 Targeting
+
+| Function               | Command         | Example                                                  |
+| ---------------------- | --------------- | -------------------------------------------------------- |
+| Target a Host          | `-h <hostname>` | `hydra -h 192.168.1.10`                                  |
+| Set Protocol           | `<protocol>`    | `hydra -l admin -P pass.txt ssh://192.168.1.10`          |
+| Set Port               | `-s <port>`     | `hydra -l admin -P pass.txt -s 2222 ssh://192.168.1.10`  |
+| Use SSL                | `-S`            | `hydra -S -l admin -P pass.txt ftp://example.com`        |
+| Use Old SSL Version    | `-O`            | `hydra -O -l admin -P pass.txt https://example.com`      |
+| Load Targets From File | `-M <file>`     | `hydra -L users.txt -P passwords.txt -M targets.txt ssh` |
+
+---
+
+### 🔐 Credentials
+
+| Function                            | Command         | Example                                                     |
+| ----------------------------------- | --------------- | ----------------------------------------------------------- |
+| Set Username                        | `-l <username>` | `hydra -l admin`                                            |
+| Set Username List                   | `-L <file>`     | `hydra -L users.txt`                                        |
+| Set Password                        | `-p <password>` | `hydra -p password123`                                      |
+| Set Password List                   | `-P <file>`     | `hydra -P rockyou.txt`                                      |
+| Use Colon-Separated Credential File | `-C <file>`     | `hydra -C creds.txt`                                        |
+| Null/Login/Reverse Passwords        | `-e nsr`        | `hydra -l admin -e nsr -P passwords.txt ssh://192.168.1.10` |
+| Loop Through Users Sequentially     | `-u`            | `hydra -L users.txt -p 123456 -u ssh://192.168.1.10`        |
+
+---
+
+### 🔁 Brute Force Options
+
+| Function                           | Command              | Example                                                         |
+| ---------------------------------- | -------------------- | --------------------------------------------------------------- |
+| Brute Force with Charset           | `-x MIN:MAX:CHARSET` | `hydra -l admin -x 4:6:aA1 ssh://192.168.1.10`                  |
+| Disable Symbols in Brute Force     | `-y`                 | `hydra -l admin -x 4:6:aA1 -y ssh://192.168.1.10`               |
+| Brute Force Without Random Shuffle | `-r`                 | `hydra -x 4:6:aA1 -r ssh://192.168.1.10`                        |
+| Module-Specific Options            | `-m <option>`        | `hydra -m "/admin" -l admin -P passwords.txt http-get://target` |
+
+---
+
+### ⚙️ Execution Control
+
+| Function                       | Command          | Example                                                     |
+| ------------------------------ | ---------------- | ----------------------------------------------------------- |
+| Execute Attack                 | _Command Format_ | `hydra -l <user> -P <wordlist> <protocol>://<host>`         |
+| Set Threads                    | `-t <number>`    | `hydra -l admin -P pass.txt -t 32 ssh://192.168.1.10`       |
+| Global Threads for Target List | `

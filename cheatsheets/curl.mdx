@@ -1,0 +1,129 @@
+---
+title: cURL
+slug: curl
+description: Command-line tool for transferring data with URLs.
+categories: ["Essential Tools", "Web Application Security"]
+bgColor: "bg-cyan-100"
+textColor: "text-cyan-900"
+top: true
+---
+
+export const metadata = {
+  title: "cURL",
+  category: "Essential Tools",
+  slug: "curl",
+};
+
+## cURL Cheatsheet {.cols-2}
+
+### 🧰 Installation
+
+    # Install curl (Linux/Debian-based)
+    sudo apt-get install curl
+
+    # Install curl (Linux/RPM-based)
+    sudo yum install curl
+
+    # Install curl (macOS with Homebrew)
+    brew install curl
+
+    # Verify installation
+    curl --version
+
+### 🔰 Basic Usage
+
+| Command                     | Description                            |
+| --------------------------- | -------------------------------------- |
+| `curl <url>`                | Basic GET request                      |
+| `curl -o output.html <url>` | Download and save to a file            |
+| `curl -O <url>`             | Download and save with remote filename |
+| `curl -L <url>`             | Follow redirects                       |
+| `curl -i <url>`             | Show headers and response              |
+| `curl -I <url>`             | Show only HTTP headers                 |
+| `curl -s <url>`             | Silent mode (no progress or errors)    |
+| `curl -v <url>`             | Verbose/debug output                   |
+
+### 🔐 Authentication & Headers
+
+| Command                                            | Description                                                    |
+| -------------------------------------------------- | -------------------------------------------------------------- |
+| `curl -u user:pass <url>`                          | Basic auth                                                     |
+| `curl -H "Authorization: Bearer <token>" <url>`    | Bearer token auth                                              |
+| `curl -H "Content-Type: application/json" <url>`   | Set Content-Type header                                        |
+| `curl -A "Mozilla/5.0" <url>`                      | Set User-Agent header                                          |
+| `curl -b "name=value" <url>`                       | Send cookie                                                    |
+| `curl -c cookies.txt <url>`                        | Save cookies to file                                           |
+| `curl -b cookies.txt <url>`                        | Use saved cookies                                              |
+| Chain multiple `-H` flags to send multiple headers | E.g., `curl -H "X-API-Key: key" -H "Accept: application/json"` |
+
+### 📤 Sending Data & HTTP Methods
+
+| Command                                                                | Description           |
+| ---------------------------------------------------------------------- | --------------------- |
+| `curl -X POST -d "key=value" <url>`                                    | POST form data        |
+| `curl -X POST -d @data.json -H "Content-Type: application/json" <url>` | POST JSON payload     |
+| `curl -X PUT -d '{"key":"value"}' <url>`                               | PUT request with JSON |
+| `curl -X PATCH -d '{"key":"newvalue"}' <url>`                          | PATCH request         |
+| `curl -X DELETE <url>`                                                 | DELETE request        |
+| `curl --data-urlencode "param=value with spaces" <url>`                | URL-encoded POST data |
+
+### 📁 File Uploads & Transfers
+
+| Command                                                   | Description                 |
+| --------------------------------------------------------- | --------------------------- |
+| `curl -F "file=@/path/to/file.txt" <url>`                 | Upload a file via POST      |
+| `curl -F "file1=@file1.txt" -F "file2=@file2.txt" <url>`  | Upload multiple files       |
+| `curl -T file.txt ftp://ftp.example.com --user user:pass` | Upload file via FTP         |
+| `curl -O <url1> -O <url2>`                                | Download multiple URLs      |
+| `curl -C - -O <url>`                                      | Resume interrupted download |
+
+### ⚙️ Advanced Features
+
+| Command                                            | Description                        |
+| -------------------------------------------------- | ---------------------------------- |
+| `curl --proxy http://proxy.example.com:8080 <url>` | Use a proxy                        |
+| `curl -k <url>`                                    | Ignore SSL verification (insecure) |
+| `curl --max-time 10 <url>`                         | Set max timeout in seconds         |
+| `curl --limit-rate 100K <url>`                     | Limit download speed               |
+| `curl --compressed <url>`                          | Request compressed response        |
+| `curl --http2 <url>`                               | Use HTTP/2 protocol                |
+
+### 🔍 Debugging & Output Handling
+
+| Command                              | Description                       |
+| ------------------------------------ | --------------------------------- | ------------------------------------- |
+| `curl --trace-ascii trace.txt <url>` | Trace full request/response       |
+| `curl -v <url>`                      | Verbose request and response info |
+| `curl <url> > output.html`           | Save output to a file             |
+| `curl <url>                          | grep "text"`                      | Pipe output to another command        |
+| `curl <url>                          | jq .`                             | Pretty-print JSON (with jq installed) |
+
+### 🧪 Examples
+
+    # Download a webpage and save it
+    curl -o webpage.html https://example.com
+
+    # POST JSON data to API
+    curl -X POST -H "Content-Type: application/json" -d '{"name":"test"}' http://api.example.com
+
+    # Authenticate and download with progress bar
+    curl -u user:pass --progress-bar -O https://example.com/secure/file.zip
+
+    # Test API with custom headers
+    curl -H "Authorization: Bearer abc123" -H "Accept: application/json" https://api.example.com/v1/data
+
+### 💡 Tips
+
+- Combine `-s` (silent) with `-o` or `-O` to suppress progress but save output.
+- Use `-k` **only for testing**; it bypasses SSL verification and is insecure.
+- Chain multiple `-H` flags to send multiple headers.
+- Use `--data-urlencode` for URL-encoded POST data.
+- Check `man curl` or `curl --help` for full option list.
+
+### 🔗 Resources
+
+- [Official Documentation](https://curl.se/docs/)
+- [Man Page](https://curl.se/docs/manpage.html)
+- Test endpoint: `curl https://httpbin.org` for HTTP request testing
+
+> **Note:** Replace URLs, filenames, tokens, and credentials with your actual values. Avoid exposing sensitive data in command history or logs.

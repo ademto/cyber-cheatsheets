@@ -1,0 +1,70 @@
+---
+title: John the Ripper
+slug: john-the-ripper
+description: Fast password cracker supporting multiple hash formats.
+categories: ["Exploitation", "Password Cracking"]
+bgColor: "bg-emerald-100"
+textColor: "text-emerald-900"
+top: true
+---
+
+export const metadata = {
+  title: "John the Ripper",
+  category: "Exploitation",
+  slug: "john-the-ripper",
+};
+
+## John the Ripper Command Reference {.cols-2}
+
+### 🚀 Basic Usage
+
+| Function               | Command                         | Example                            |
+| ---------------------- | ------------------------------- | ---------------------------------- |
+| Basic Cracking         | `john <password_file>`          | `john hashes.txt`                  |
+| Show Cracked Passwords | `john --show <password_file>`   | `john --show hashes.txt`           |
+| Help Menu              | `john -h` or `john --help`      | `john --help`                      |
+| Resume Cracking        | `john --restore`                | `john --restore`                   |
+| Resume from File       | `john --restore=<restore_file>` | `john --restore=./session.rec`     |
+| Session Management     | `john --session=<name> <file>`  | `john --session=crack1 hashes.txt` |
+
+### 🧠 Attack Modes
+
+| Mode                   | Command                                  | Example                                  |
+| ---------------------- | ---------------------------------------- | ---------------------------------------- |
+| Wordlist Mode          | `john --wordlist=<file> <password_file>` | `john --wordlist=rockyou.txt hashes.txt` |
+| Incremental Mode       | `john --incremental <password_file>`     | `john --incremental hashes.txt`          |
+| Charset in Incremental | `john --incremental:<charset> <file>`    | `john --incremental:alpha hashes.txt`    |
+| Single Crack Mode      | `john --single <password_file>`          | `john --single hashes.txt`               |
+| External Mode          | `john --external=<mode> <password_file>` | `john --external=Custom hashes.txt`      |
+| Mask Mode              | `john --mask=?l?l?l?d <password_file>`   | `john --mask=?l?l?l?d hashes.txt`        |
+| Custom Rules           | `john --rules=<rule> <password_file>`    | `john --rules=custom hashes.txt`         |
+
+### 🧩 Hashes & Formats
+
+| Function               | Command                                  | Example                             |
+| ---------------------- | ---------------------------------------- | ----------------------------------- |
+| Specify Hash Format    | `john --format=<format> <password_file>` | `john --format=md5crypt hashes.txt` |
+| Auto Format Detection  | `john --format=auto <password_file>`     | `john --format=auto hashes.txt`     |
+| List Supported Formats | `john --list=formats`                    | `john --list=formats`               |
+
+### ⚙️ Performance & Customization
+
+| Function                  | Command                                      | Example                            |
+| ------------------------- | -------------------------------------------- | ---------------------------------- |
+| Fork (Parallel Processes) | `john --fork=<n> <password_file>`            | `john --fork=4 hashes.txt`         |
+| Save Memory               | `john --save-memory=<level> <password_file>` | `john --save-memory=30 hashes.txt` |
+| Verbose Output            | `john --verbose <password_file>`             | `john --verbose hashes.txt`        |
+
+### 📦 Output Examples {.col-span-2}
+
+| Command                                  | Output Example                                                            |
+| ---------------------------------------- | ------------------------------------------------------------------------- |
+| `john hashes.txt`                        | `Loaded 1 password hash (descrypt)`<br>`guesses: 0 time: 0:00:00:00`      |
+| `john --show hashes.txt`                 | `user1:password123`<br>`user2:password456`                                |
+| `john --format=md5crypt hashes.txt`      | `Loaded 1 password hash (md5crypt)`                                       |
+| `john --wordlist=rockyou.txt hashes.txt` | `Loaded 1000000 words from rockyou.txt`<br>`Press 'q' or Ctrl-C to abort` |
+| `john --mask=?l?l?l?d hashes.txt`        | `Using mask: ?l?l?l?d (length 4)`                                         |
+| `john --incremental hashes.txt`          | `Using incremental mode: ASCII`<br>`ETA: 2025-05-30 20:00`                |
+| `john --rules=custom hashes.txt`         | `Using custom rules`                                                      |
+| `john --restore`                         | `Restored session from ./john.rec`                                        |
+| `john --fork=4 hashes.txt`               | `Forked 4 processes`                                                      |
