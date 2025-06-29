@@ -15,7 +15,7 @@ export default function BlogPage() {
           <div className="bg-gray-50 rounded-lg p-8 text-center">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">Coming Soon</h2>
             <p className="text-gray-600 mb-4">
-              We're working on bringing you valuable content about cybersecurity tools, 
+              We&apos;re working on bringing you valuable content about cybersecurity tools, 
               techniques, and best practices.
             </p>
             <p className="text-gray-600">

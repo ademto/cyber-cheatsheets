@@ -27,7 +27,7 @@ const md = new MarkdownIt({
 function headerSections(md: MarkdownIt) {
   const originalRender = md.render.bind(md);
   
-  md.render = function(src: string, env?: any) {
+  md.render = function(src: string, env?: Record<string, unknown>) {
     const html = originalRender(src, env);
     
     // Process the HTML to add the wrapper structure

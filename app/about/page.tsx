@@ -91,7 +91,7 @@ export default function AboutPage() {
           <section>
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">Get Involved</h2>
             <p className="text-gray-700 mb-4">
-              We believe in the power of community collaboration. Whether you're a seasoned 
+              We believe in the power of community collaboration. Whether you&apos;re a seasoned 
               security professional or just starting your cybersecurity journey, there are 
               many ways to contribute:
             </p>

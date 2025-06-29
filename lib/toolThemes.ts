@@ -370,7 +370,7 @@ export const fallbackThemes: Record<string, ToolTheme> = {
   }
 };
 
-export function getToolTheme(toolName: string, frontmatterData?: any): ToolTheme {
+export function getToolTheme(toolName: string, frontmatterData?: Record<string, string>): ToolTheme {
   // If frontmatter has theme data, use it
   if (frontmatterData?.bgColor) {
     const colorKey = frontmatterData.bgColor.replace('bg-', '').replace('-100', '').replace('-200', '').replace('-300', '').replace('-400', '');

@@ -42,7 +42,7 @@ export default function DisclaimerPage() {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">No Warranty</h2>
             <p className="text-gray-700 mb-4">
-              The information on this website is provided "as is" without any warranties, express or 
+              The information on this website is provided &quot;as is&quot; without any warranties, express or 
               implied. We make no representations about the accuracy, completeness, or reliability of 
               any information, tools, or techniques described.
             </p>

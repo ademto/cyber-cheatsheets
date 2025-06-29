@@ -1,5 +1,4 @@
 import Hero from "@/components/Hero";
-import Image from "next/image";
 
 import fs from 'fs/promises';
 import path from 'path';

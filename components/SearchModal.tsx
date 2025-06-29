@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { CiSearch } from "react-icons/ci";
-import { MdKeyboardCommandKey } from "react-icons/md";
 import { IoClose } from "react-icons/io5";
 import Link from 'next/link';
+import { useSearch } from './SearchProvider'
 
 interface CheatsheetMeta {
   title: string;
@@ -81,19 +81,15 @@ export default function SearchModal({ isOpen, onClose, cheatsheets }: SearchModa
               <IoClose className="text-xl" />
             </button>
           </div>
-          <div className="flex items-center gap-2 mt-2 text-sm text-gray-500">
-            <span>Press</span>
-            <kbd className="px-2 py-1 bg-gray-100 rounded text-xs">⌘</kbd>
-            <span>+</span>
-            <kbd className="px-2 py-1 bg-gray-100 rounded text-xs">K</kbd>
-            <span>to close</span>
+          <div className="text-center text-gray-500 text-sm">
+            Press &quot;Esc&quot; to close
           </div>
         </div>
         
         <div className="overflow-y-auto max-h-[60vh]">
           {filteredCheatsheets.length === 0 ? (
             <div className="p-8 text-center text-gray-500">
-              No cheatsheets found for "{searchTerm}"
+              No cheatsheets found for &quot;{searchTerm}&quot;
             </div>
           ) : (
             <div className="p-4">
