@@ -1,0 +1,13 @@
+declare module 'markdown-it-abbr';
+declare module 'markdown-it-footnote';
+declare module 'markdown-it-ins';
+declare module 'markdown-it-sub';
+declare module 'markdown-it-sup';
+declare module 'markdown-it-task-lists';
+declare module 'markdown-it-attrs';
+declare module 'markdown-it-highlightjs';
+declare module 'markdown-it-checkbox';
+declare module 'markdown-it-multimd-table';
+declare module 'markdown-it-shortcode-tag';
+declare module 'markdown-it-anchor';
+declare module 'markdown-it-highlight-lines'; 

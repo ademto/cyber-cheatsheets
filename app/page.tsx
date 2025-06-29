@@ -101,34 +101,34 @@ export default async function Home() {
   ];
 
   return (
-    <div>
-      <section className='bg-[#fefae0] md:h-80'>
+    <>
+      <section className='bg-[#fefae0] py-20'>
         <Hero />
-        <div className="lg:w-2/3 p-4 mx-auto mt-10">
-          {sortedCategories.map((category) => (
-            <section className="mb-20" key={category}>
-              <h2 className="font-bold text-2xl mb-2">{category}</h2>
-              <p className="text-gray-600 mb-4">{categoryDescriptions[category] || `${category} tools and utilities`}</p>
-              <div className="h-1 bg-slate-100">
-                <div className="w-24 h-full bg-black"></div>
-              </div>
-              <ul className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5 mx-auto mt-10">
-                {grouped[category].map(({ title, slug, bgColor, textColor, description }) => (
-                  <li key={slug}>
-                    <a 
-                      className={`block px-6 py-4 rounded-lg transition-all duration-300 ease-in-out text-center font-medium hover:shadow-sm hover:scale-101 ${bgColor} ${textColor} border border-transparent hover:border-gray-300`}
-                      href={`/cheatsheets/${slug}`}
-                      title={description}
-                    >
-                      {title}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          ))}
-        </div>
       </section>
-    </div>
+      <div className="lg:w-2/3 p-4 mx-auto mt-10">
+        {sortedCategories.map((category) => (
+          <section className="mb-20" key={category}>
+            <h2 className="font-bold text-2xl mb-2">{category}</h2>
+            <p className="text-gray-600 mb-4">{categoryDescriptions[category] || `${category} tools and utilities`}</p>
+            <div className="h-1 bg-slate-100">
+              <div className="w-24 h-full bg-black"></div>
+            </div>
+            <ul className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5 mx-auto mt-10">
+              {grouped[category].map(({ title, slug, bgColor, textColor, description }) => (
+                <li key={slug}>
+                  <a 
+                    className={`block px-6 py-4 rounded-lg transition-all duration-300 ease-in-out text-center font-medium hover:shadow-sm hover:scale-101 ${bgColor} ${textColor} border border-transparent hover:border-gray-300`}
+                    href={`/cheatsheets/${slug}`}
+                    title={description}
+                  >
+                    {title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))}
+      </div>
+    </>
   );
 }
