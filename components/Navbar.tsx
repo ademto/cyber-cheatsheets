@@ -4,11 +4,18 @@ import Link from 'next/link'
 import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 import { CiSearch } from "react-icons/ci";
 import { MdKeyboardCommandKey } from "react-icons/md";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSearch } from './SearchProvider';
+import { usePathname } from 'next/navigation';
 
 const Navbar = () => {
   const { openSearch } = useSearch();
+  const pathname = usePathname();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -21,8 +28,28 @@ const Navbar = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [openSearch]);
 
+  // Check if we're on the homepage
+  const isHomepage = pathname === '/';
+  
+  // Use warm cream background for homepage, white for other pages
+  const navbarBgClass = isHomepage ? 'bg-gray-50' : 'bg-white';
+  const borderClass = isHomepage ? 'border-gray-200' : 'border-gray-200';
+
+  if (!mounted) {
+    // Return a placeholder during SSR to avoid hydration mismatch
+    return (
+      <div className="bg-white border-b-2 border-gray-200">
+        <div className="container mx-auto flex items-center justify-between h-20 px-4">
+          <div className="logo">
+            <Link className="text-2xl font-bold" href="/">Ademto</Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className={"bg-[#fefae0] border-b-2 border-[#E5E8EB]"}>
+    <div className={`${navbarBgClass} border-b-2 ${borderClass}`}>
       <div className="container mx-auto flex items-center justify-between h-20 px-4">
         <div className="logo">
           <Link className="text-2xl font-bold" href="/">Ademto</Link>
@@ -62,7 +89,7 @@ const Navbar = () => {
           </a>
 
           <a
-            href="https://twitter.com/yourTwitterHandle"
+            href="https://twitter.com/RealPentester"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Twitter"

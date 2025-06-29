@@ -102,7 +102,7 @@ export default async function Home() {
 
   return (
     <>
-      <section className='bg-[#fefae0] py-20'>
+      <section className='bg-gray-50 py-20'>
         <Hero />
       </section>
       <div className="lg:w-2/3 p-4 mx-auto mt-10">
